@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+ @import "main.scss";
+ @import 'selectize';
+ @import 'selectize.bootstrap3';
+ @import "font-awesome";
+ @import url('https://fonts.googleapis.com/css?family=Dosis|Just+Another+Hand|Playfair+Display');
+

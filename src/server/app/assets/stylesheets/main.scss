@@ -1,0 +1,75 @@
+html {
+    --border-radius: 5px;
+    // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    // font-family: "Hiragino Kaku Gothic ProN";
+    // font-family: 'Holtwood One SC', serif;
+    font-family: 'Playfair Display', serif;
+    font-family: 'Just Another Hand', cursive;
+    font-family: 'Dosis', sans-serif;
+  }
+  body{
+    // font-family: 'Holtwood One SC', serif;
+    font-family: 'Dosis', sans-serif;
+  }
+.navbar{
+    padding: 1em;
+}
+
+.navbar li{
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size:1.2em;
+ }
+ 
+ .welcome-title{
+    width: 100%;
+    padding: 0 1em;
+    margin: 0 auto;
+}
+
+.top-wrapper{
+    padding:8em 0 15em 0;
+    background-image:url("welcome2");
+    color:white;
+    background-size:cover;
+    text-align:center;
+  }
+
+  .top-wrapper h1{
+    opacity:0.8;
+  }
+
+  .top-wrapper p{
+    opacity:0.8;
+  }
+
+  .btn {
+    padding: 0.5em 1em;
+    color: white;
+    display: inline-block;
+    opacity: 0.8;
+    border-radius:0.3em;
+    font-size:1.5em;
+  }
+  
+  .btn:hover{
+    opacity:1;
+  }
+
+  .signup {
+    background-color: #239b76;
+  }
+
+  .new-teacher {
+    background-color: #3b5998;
+  }
+  
+  .btn-wrapper {
+    margin: 2em 0;
+  }
+  
+  .btn-wrapper p {
+    margin: 0.5em 0;
+    font-size:1.5em;
+    opacity:0.8;
+  }
