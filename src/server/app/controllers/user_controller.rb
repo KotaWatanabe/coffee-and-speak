@@ -47,7 +47,7 @@ class UserController < ApplicationController
     end
 
     
-    def dash_board
+    def dashboard
       @favourited_teachers = current_user.favourited_teachers.order("favourites.created_at DESC")
       @teacher = current_user.favourited_teachers
     end

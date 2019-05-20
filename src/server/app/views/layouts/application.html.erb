@@ -31,7 +31,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'dropdown-item'%>
-                  <%= link_to 'My Dashbord', "#", class: "dropdown-item" %>
+                  <%= link_to 'My Dashbord', "dashboard_user_path(current_user)", class: "dropdown-item" %>
               </li>
 
               <li class="nav-item">

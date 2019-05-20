@@ -1,0 +1,39 @@
+<div class="container-fluid padding">
+  <div class="row welcome text-center">
+		<div class="col-12">
+            <h1>It's <%=current_user.first_name%>'s page</h1>
+        </div>
+   </div>
+    <div class="dashboard-wrapper">
+
+        <div class="lesson-box">
+            Your upcoming class
+        </div>
+
+        <div class="favourite-box">
+            <h2 class="text-center" >Your favourited teachers</h2>
+            <div class="row teachers-row">
+                <% @favourited_teachers.each do |teacher| %>
+                <div class="row col-md-6 col-lg-4 mx-auto">
+                    <div class="card favourited-card">
+                        <div class="card-body">
+                          <span class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></span>
+                            <div class="card-title">
+                                <h3><%= link_to(teacher.name, teacher_path(teacher)) %> </h3><br />
+                                <p><%=teacher.price %> CAD</p>
+                                <p><%=teacher.language %></p>
+                                <p>Favourite delete</p>
+                                <%= link_to fa_icon('thumbs-up'), favourite_path(teacher.favourites.id) , method: :delete, style: 'color: blue;' %>
+                            </div>
+                            </p>
+                         </div>   
+                        </div>
+                    </div>  
+                </div>  
+            <% end %>
+            </div>
+        </div>
+
+    </div>
+</div>
+    
