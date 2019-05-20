@@ -10,6 +10,61 @@
   </head>
 
   <body>
+    <header>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+      <%= link_to root_path do %>
+       <%= image_tag "s_logo.png", class: "navbar-brand" %>
+      <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+       
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Hello <%= current_user.first_name %> 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'dropdown-item'%>
+                  <%= link_to 'My Dashbord', "#", class: "dropdown-item" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to 'Find Teacher', teachers_path, class: "nav-link" %>
+              </li>
+               <li class="nav-item">
+                <%= link_to "Sign Out", session_path, method: :delete, data: {confirm: "Are you sure you want to log out?"}, class: "nav-link text-warning" %>
+              </li>
+               <li class="nav-item", id="login-show">
+                <%= link_to 'Create Lesson', new_teacher_path, class: "nav-link", id:"login-show" %>
+              </li>
+              <% end %>
+            <% else %>
+              <li class="nav-item", id="login-show">
+                <%= link_to 'Sign In', new_session_path, class: "nav-link", id:"login-show" %>
+              </li>
+           </ul>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+      <div class="container d-flex justify-content-center mt-2">
+        <% flash.each do |type, message| %>
+            <div class="flash-message alert alert-<%= type %> alert-dismissible fade show" data-toggle="collapse">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+              <small><%= message %></small>
+            </div>
+        <% end %>
+      </div>
     <%= yield %>
   </body>
 </html>
