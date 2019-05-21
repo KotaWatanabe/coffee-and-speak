@@ -19,9 +19,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-       
-          </ul>
           <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
 
@@ -31,24 +28,18 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'dropdown-item'%>
-                  <%= link_to 'My Dashbord', "dashboard_user_path(current_user)", class: "dropdown-item" %>
+                  <%= link_to 'My Dashbord', dashboard_user_path(current_user), class: "dropdown-item" %>
               </li>
-
               <li class="nav-item">
                 <%= link_to 'Find Teacher', teachers_path, class: "nav-link" %>
               </li>
                <li class="nav-item">
                 <%= link_to "Sign Out", session_path, method: :delete, data: {confirm: "Are you sure you want to log out?"}, class: "nav-link text-warning" %>
               </li>
-               <li class="nav-item", id="login-show">
-                <%= link_to 'Create Lesson', new_teacher_path, class: "nav-link", id:"login-show" %>
-              </li>
-              <% end %>
             <% else %>
               <li class="nav-item", id="login-show">
                 <%= link_to 'Sign In', new_session_path, class: "nav-link", id:"login-show" %>
               </li>
-           </ul>
             <% end %>
           </ul>
         </div>

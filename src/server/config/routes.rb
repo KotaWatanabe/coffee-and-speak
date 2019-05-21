@@ -10,5 +10,14 @@ Rails.application.routes.draw do
   end
 
   resource :session, only:[:new, :create, :destroy]
+
+  resources :teachers do
+    resources :favourites, shallow: true, only: [:create, :destroy]
+    member do 
+      get :teacher_dashboard
+    end
+    resources :reviews, shallow: true, only: [:create, :destroy] do
+    end
+  end
   
 end

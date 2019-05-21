@@ -1,0 +1,28 @@
+
+  <div class="row welcome text-center">
+		<div class="col-12">
+            <h1 class="display-4">Teachers</h1>
+        </div>
+   </div>
+		<hr>
+    <div class="row teachers-row">
+        <% @teachers.each do |teacher| %>
+            <div class="row col-md-6 col-lg-4 mx-auto">
+                <div class="card teacher-card">
+                    <div class="card-body">
+                        <div class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
+                        <h4 class="card-title">
+                            <%= link_to(teacher.name, teacher_path(teacher)) %> <br />
+                        </h4>
+                        <p class="card-text"><%= teacher.description.first(80) %>... </p>
+                        <p class="card-text"><%= teacher.price %> CAD</p>
+                        <p class="card-text"><%= teacher.area %></p>
+                             <small>
+                              Posted <%= time_ago_in_words(teacher.created_at)  %> ago
+                              </small>
+                    </div>   
+                </div>
+            </div>  
+        <% end %>
+    </div>
+</div>

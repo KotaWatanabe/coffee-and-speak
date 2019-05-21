@@ -1,0 +1,116 @@
+<div class="container-fluid padding">
+  <div class="teacher-wrapper">
+    <div class="teacher-profile-box">
+    <div class="card">
+      <div class="card-body">
+          <div class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
+        <div class="card-title">
+          <h3><%= @teacher.name %></h3>
+          <div class="card-text">
+              <p><%= @teacher.description %></p>
+              <p><%= @teacher.price %> CAD</p>
+              <p><%= @teacher.area %></p>
+              <% unless @teacher.languages.empty? %>
+                <div>
+                <% @teacher.languages.each do |language| %>
+                  <%= tag.name %>
+                <% end %>
+                </div>
+              <% end %>  
+                <% if user_signed_in? && %>
+                  <% if @favourite.present? %>
+                    <%= link_to fa_icon('thumbs-up 3x'), favourite_path(@favourite) , method: :delete, style: 'color: blue;' %>
+                  <% else %>
+                    <%= link_to fa_icon('thumbs-up 3x'), teacher_favourites_path(@teacher), method: :post, style: 'color: lightgrey;' %>
+                  <% end %>
+                <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <% if false %>
+
+
+ <h3>Review</>
+ <%= form_with(model: [@teacher, @review], local: true) do |f| %>
+    <% if @review.errors.present? %>
+      <p class="form-errors">
+        <%= @review.errors.full_messages.join(", ") %>
+      </p>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.text_area(
+      :body, cols: 50, rows: 5,
+      placeholder: "What are your thoughts...",
+      class: "form-control"
+      ) %><br>
+      <%= f.label :rating %>
+      <%= f.number_field :rating, in: 1..5 %>
+    </div>
+    <%= f.submit :submit %>
+  <% end %>
+
+<% end %>
+  <hr />
+
+  <h3> Reviews: </h3>
+
+    <ul class="review-list">
+      <% @reviews.each do |review| %>
+        <li>
+          <p>
+          <p>Rating: <%= review.rating %></p><br />
+           <p><%= review.body %> </p> <br />
+          <small>
+            <%= link_to(
+            "Delete",
+            review_path(review),
+            method: :delete, data: {
+              confirm: "Are you sure?"
+            }
+            ) %>
+          </small>
+          <small>
+            Reviewd <%= time_ago_in_words(review.created_at) %> ago
+          </small>
+        </p>
+        </li>
+      <% end %>
+     </ul>
+    </div>
+
+    <div class="teacher-booking-box">
+      <div class="row welcome text-center">
+        <div class="col-12">
+                <h1 class="display-4">Lesson request</h1>
+                <hr>
+        </div>
+      </div>
+
+        <%= form_with(model: @lesson, local: true) do |f| %>
+
+            <div class="form-group">
+                <%= f.label :Place, class:"form-label" %>
+                <%= f.text_field :place,class:"form-control",placeholder: 'Choose cafe where you want to have a class' %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :Schedule, class:"form-label" %>
+                <%= f.number_field :schedule, class:"form-control",placeholder: 'When do you want to have a lesson' %>CAD
+            </div> 
+
+              <div class="form-group">
+                <%= f.label :Plice, class:"form-label"%>
+                <%= f.text_field :plice,class:"form-control",placeholder: 'Pay with your cledit card' %>
+              </div>
+
+              <p><strong><%=@teacher.price%></strong>CAD</p>
+
+            <%= f.submit 'Book now', class: 'btn btn-warning col-12 col-md-3' %>
+        <% end %>
+    </div>
+
+
+</div>

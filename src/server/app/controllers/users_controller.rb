@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
     before_action :find_user, only: [:edit, :update, :change_password, :update_password]
 
     def new 

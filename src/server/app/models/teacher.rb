@@ -11,15 +11,15 @@ class Teacher < ApplicationRecord
     has_many :languages, through: :teacher_languages
 
 
-  def tag_names
-    self.languages.map{ |t| t.name }.join(",")
-  end
+#   def tag_names
+#     self.languages.map{ |t| t.name }.join(",")
+#   end
 
-    def tag_names=(rhs)
-            self.languages = rhs.strip.split(/\s*,\s*/).map do |tag_name|
-            Tag.find_or_initialize_by(name: tag_name)
-        end
-    end
+#     def tag_names=(rhs)
+#             self.languages = rhs.strip.split(/\s*,\s*/).map do |tag_name|
+#             Tag.find_or_initialize_by(name: tag_name)
+#         end
+#     end
 
     private
 

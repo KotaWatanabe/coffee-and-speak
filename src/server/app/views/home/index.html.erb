@@ -4,9 +4,11 @@
         <p class="lead display-4">Find your best private teacher</p>
     </div>
      <div class="btn-wrapper">
-         <%= link_to "SignUp!", "#", class:"btn signup"%>
-          <p>or</p>
-          <%= link_to "Become a Teacher?", "#" class:"btn new-teacher"%>
+       <% if !user_signed_in? %>
+         <%= link_to "SignUp!", new_user_path, class:"btn signup"%>
+       <% else %>
+          <%= link_to "Become a Teacher?", new_teacher_path, class:"btn new-teacher"%>
+       <% end %>
     </div>
 
     <div class="login-modal-wrapper" id="login-modal">
