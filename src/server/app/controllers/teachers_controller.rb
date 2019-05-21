@@ -6,9 +6,9 @@ class TeachersController < ApplicationController
   
     def create
       @teacher = Teacher.new teacher_params
-      @teacher = current_user
+      @teacher.user = current_user
       if @teacher.save
-        redirect_to teacher_dashboard_teacher_path(@teacher)
+        redirect_to teacher_path(@teacher.id)
       else
         render :new
       end
@@ -21,13 +21,12 @@ class TeachersController < ApplicationController
     end
   
     def index
-        @teachers = Teacher.all.order(created_at: :desc)
-        # if params[:languguage]
-        #   @language = Language.find_or_initialize_by(name: params[:language])
-        #   @teachers= @language.teachers.order(created_at: :DESC)
-        # else
-        #   @teachers = Teacher.order(created_at: :DESC)
-        # end
+        if params[:language]
+          @language = Language.find_or_initialize_by(name: params[:language])
+          @teachers= @language.teachers.order(created_at: :DESC)
+        else
+          @teachers = Teacher.order(created_at: :DESC)
+        end
     end
   
     def edit
@@ -56,7 +55,7 @@ class TeachersController < ApplicationController
     private
   
     def teacher_params
-      params.require(:teacher).permit(:description, :price,:area)
+      params.require(:teacher).permit(:description, :price, :area, :tag_names)
     end
   
     def find_teacher

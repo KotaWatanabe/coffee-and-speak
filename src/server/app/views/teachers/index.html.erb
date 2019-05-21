@@ -4,6 +4,16 @@
             <h1 class="display-4">Teachers</h1>
         </div>
    </div>
+
+   <% if @language.present? %>
+    <h6>
+        Showing teachers tagged by
+        <span class= "badge badge-pill badge-primary">
+        <%= @language.name %>
+        </span>
+    </h6>
+    <% end %>
+    
 		<hr>
     <div class="row teachers-row">
         <% @teachers.each do |teacher| %>
@@ -12,7 +22,7 @@
                     <div class="card-body">
                         <div class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
                         <h4 class="card-title">
-                            <%= link_to(teacher.name, teacher_path(teacher)) %> <br />
+                            <%= link_to(teacher.user.first_name, teacher_path(teacher)) %> <br />
                         </h4>
                         <p class="card-text"><%= teacher.description.first(80) %>... </p>
                         <p class="card-text"><%= teacher.price %> CAD</p>

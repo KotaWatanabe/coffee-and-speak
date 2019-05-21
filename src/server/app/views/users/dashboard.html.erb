@@ -19,11 +19,9 @@
                         <div class="card-body">
                           <span class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></span>
                             <div class="card-title">
-                                <h3><%= link_to(teacher.name, teacher_path(teacher)) %> </h3><br />
+                                <h3><%= link_to(teacher.user.first_name, teacher_path(teacher)) %> </h3><br />
                                 <p><%=teacher.price %> CAD</p>
-                                <p><%=teacher.language %></p>
-                                <p>Favourite delete</p>
-                                <%= link_to fa_icon('thumbs-up'), favourite_path(teacher.favourites.id) , method: :delete, style: 'color: blue;' %>
+                                <%= link_to fa_icon('thumbs-up'), favourite_path(teacher.favourite_ids) , method: :delete, style: 'color: blue;' %>
                             </div>
                             </p>
                          </div>   

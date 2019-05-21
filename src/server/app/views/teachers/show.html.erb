@@ -5,7 +5,7 @@
       <div class="card-body">
           <div class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
         <div class="card-title">
-          <h3><%= @teacher.name %></h3>
+          <h3><%= @teacher.user.first_name %></h3>
           <div class="card-text">
               <p><%= @teacher.description %></p>
               <p><%= @teacher.price %> CAD</p>
@@ -13,7 +13,7 @@
               <% unless @teacher.languages.empty? %>
                 <div>
                 <% @teacher.languages.each do |language| %>
-                  <%= tag.name %>
+                  <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
                 <% end %>
                 </div>
               <% end %>  
