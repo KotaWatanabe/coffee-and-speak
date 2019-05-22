@@ -91,22 +91,14 @@
 
         <%= form_with(model: @lesson, local: true) do |f| %>
 
-            <div class="form-group">
-                <%= f.label :Place, class:"form-label" %>
-                <%= f.text_field :place,class:"form-control",placeholder: 'Choose cafe where you want to have a class' %>
-            </div>
+            <h4>Place: <%=@teacher.area%></h4>    
 
             <div class="form-group">
                 <%= f.label :Schedule, class:"form-label" %>
-                <%= f.number_field :schedule, class:"form-control",placeholder: 'When do you want to have a lesson' %>CAD
+                <%= f.number_field :schedule, class:"form-control",placeholder: 'When do you want to have a lesson' %>
             </div> 
-
-              <div class="form-group">
-                <%= f.label :Plice, class:"form-label"%>
-                <%= f.text_field :plice,class:"form-control",placeholder: 'Pay with your cledit card' %>
-              </div>
-
-              <p><strong><%=@teacher.price%></strong>CAD</p>
+              <h4>Price: <%=@teacher.price%>CAD</h4>              
+              <p>Once Teacher approved, pay with your credit card</p>
 
             <%= f.submit 'Book now', class: 'btn btn-warning col-12 col-md-3' %>
         <% end %>

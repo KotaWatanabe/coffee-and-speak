@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :teachers
+      resource :session, only: [:create, :destroy]
+      resources :users, only: [:create] do
+        # /api/v1/users/current
+        get :current, on: :collection
+        # default
+        # /api/v1/users/:id/current
+        # on: :member
+        # /api/v1/users/:user_id/current
+      end
+    end
+  end
+  
+  
+  
+  
   get("/", {to: "home#index", as: "root"})
   resources :users, only:[:new, :edit, :update, :create] do
     member do 

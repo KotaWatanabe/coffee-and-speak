@@ -31,7 +31,7 @@
                  <%= f.collection_check_boxes :language_ids, Language.all, :id, :name do |b| %>
                   <div class="tag-wrapper">
                         <%= b.check_box %>
-                        <%= b.text.humanize :tag_names %>
+                        <%= b.text.humanize %>
                   </div>
                   <% end %>
             </div>
