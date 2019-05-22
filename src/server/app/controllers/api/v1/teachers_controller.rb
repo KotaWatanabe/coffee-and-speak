@@ -1,4 +1,4 @@
-class Api::V1::QuestionsController < ApplicationController
+class Api::V1::QuestionsController < Api::ApplicationController
     before_action :authenticate_user!, only: [ :create, :destroy, :update ]
     before_action :find_teacher, only: [ :destroy, :show, :update ]
   
