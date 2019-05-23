@@ -20,7 +20,12 @@
             <div class="row col-md-6 col-lg-4 mx-auto">
                 <div class="card teacher-card">
                     <div class="card-body">
-                        <div class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
+                        <div class=teacher-image> 
+                        <% if teacher.user.avatar.attached? %>
+                            <%= image_tag teacher.avatar %>
+                        <% end %>
+                        <%= fa_icon "user 5x", style: 'color: lightgrey;'%>
+                        </div>
                         <h4 class="card-title">
                             <%= link_to(teacher.user.first_name, teacher_path(teacher)) %> <br />
                         </h4>
