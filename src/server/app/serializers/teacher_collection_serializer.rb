@@ -1,5 +1,5 @@
 class TeacherCollectionSerializer < ActiveModel::Serializer
-  attributes (
+  attributes(
     :id,
     :price,
     :area,

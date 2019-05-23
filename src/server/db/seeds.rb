@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+PASSWORD = "supersecret"
+
+super_user = User.create(
+  first_name: "Jon",
+  last_name: "Snow",
+  email: "js@winterfell.gov",
+  password: PASSWORD
+)
+
+puts Cowsay.say("Login with #{super_user.email} and password: #{PASSWORD}", :koala)

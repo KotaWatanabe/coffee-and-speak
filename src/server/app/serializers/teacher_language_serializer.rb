@@ -1,6 +1,6 @@
 class TeacherLanguageSerializer < ActiveModel::Serializer
   attributes (
-    :id
+    :id,
     :created_at, 
     :updated_at
   )

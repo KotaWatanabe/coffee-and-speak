@@ -7,10 +7,6 @@ Rails.application.routes.draw do
       resources :users, only: [:create] do
         # /api/v1/users/current
         get :current, on: :collection
-        # default
-        # /api/v1/users/:id/current
-        # on: :member
-        # /api/v1/users/:user_id/current
       end
     end
   end

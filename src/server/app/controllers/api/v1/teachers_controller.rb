@@ -1,4 +1,4 @@
-class Api::V1::QuestionsController < Api::ApplicationController
+class Api::V1::TeachersController < Api::ApplicationController
     before_action :authenticate_user!, only: [ :create, :destroy, :update ]
     before_action :find_teacher, only: [ :destroy, :show, :update ]
   
@@ -16,9 +16,9 @@ class Api::V1::QuestionsController < Api::ApplicationController
       render(
         json: @teacher,
 
-        include: [ :teacher, {reviews: [ :teacher ]} ]
-        include: [ :teacher, {favourites: [ :teacher ]} ]
-        include: [ :teacher, {availabilities: [ :teacher ]} ]
+        include: [ {reviews: [ :student ]}, {favourites: [ :student ]} ]
+        # include: [ :teacher, {favourites: [ :student ]} ], {availabilities: [ :student ]} 
+        # include: [ :teacher, {availabilities: [ :student ]} ]
       )
     end
   
@@ -27,7 +27,7 @@ class Api::V1::QuestionsController < Api::ApplicationController
       teacher.user = current_user
   
       teacher.save!
-      render json: { status:201, id: question.id }
+      render json: { status:201, id: teacher.id }
     end
   
     def update
