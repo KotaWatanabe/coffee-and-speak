@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import { WelcomePage } from "./WelcomePage"
+import { NavBar } from "./NavBar"
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +20,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+        <header>
+            <NavBar
+            //   currentUser={this.state.currentUser}
+            //   onSignOut={this.signOut}
+            />
+          </header>
           <Switch>
             <Route exact path="/" component={WelcomePage} />
           </Switch>
