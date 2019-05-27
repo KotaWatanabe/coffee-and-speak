@@ -6,12 +6,14 @@
    </div>
 
    <% if @language.present? %>
-    <h6>
-        Showing teachers tagged by
+     <div class="row welcome text-center">
+		<div class="col-12">
+            <h3>Showing teachers tagged by
         <span class= "badge badge-pill badge-primary">
         <%= @language.name %>
-        </span>
-    </h6>
+        </span></h3>
+        </div>
+   </div>
     <% end %>
     
 		<hr>
@@ -19,22 +21,33 @@
         <% @teachers.each do |teacher| %>
             <div class="row col-md-6 col-lg-4 mx-auto">
                 <div class="card teacher-card">
-                    <div class="card-body">
+                    <div class="card-body"> 
+                        <div class="teacher-box">
                         <div class=teacher-image> 
-                        <% if teacher.user.avatar.attached? %>
-                            <%= image_tag teacher.avatar %>
-                        <% end %>
-                        <%= fa_icon "user 5x", style: 'color: lightgrey;'%>
+                            <% if teacher.user.avatar.attached? %>
+                                <%= image_tag teacher.user.avatar %>
+                            <% else %>
+                                <%= image_tag("fake.jpeg") %>
+                            <% end %>
                         </div>
-                        <h4 class="card-title">
-                            <%= link_to(teacher.user.first_name, teacher_path(teacher)) %> <br />
-                        </h4>
-                        <p class="card-text"><%= teacher.description.first(80) %>... </p>
-                        <p class="card-text"><%= teacher.price %> CAD</p>
-                        <p class="card-text"><%= teacher.area %></p>
-                             <small>
-                              Posted <%= time_ago_in_words(teacher.created_at)  %> ago
-                              </small>
+                            <div class="teacher-content">
+                                <h4 class="card-title">
+                                    <%= link_to(teacher.user.full_name, teacher_path(teacher)) %> <br />
+                                </h4>
+                                <p class="card-text"><%= teacher.description.first(80) %>... </p>
+                                <p class="card-text"><%= teacher.price %> CAD</p>
+                                <% unless teacher.languages.empty? %>
+                                <div>
+                                    <% teacher.languages.each do |language| %>
+                                    <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
+                                </div>
+                                <% end %>
+                                 <% end %>  
+                                    <small>
+                                    Posted <%= time_ago_in_words(teacher.created_at)  %> ago
+                                    </small>
+                            </div>
+                        </div>
                     </div>   
                 </div>
             </div>  

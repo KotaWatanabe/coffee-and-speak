@@ -5,10 +5,11 @@ class TeacherSerializer < ActiveModel::Serializer
     :area,
     :description,
     :created_at, 
-    :updated_at
+    :updated_at,
   )
 
-  belongs_to(:user, key: :teacher)
+  belongs_to(:user, serializer: UserSerializer)
+
 
   has_many(:favourites)
   has_many(:reviews)

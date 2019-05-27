@@ -5,7 +5,13 @@ class TeacherCollectionSerializer < ActiveModel::Serializer
     :area,
     :description,
     :created_at, 
-    :updated_at
+    :updated_at,
+    :user
   )
+  belongs_to(:user, key: :student)
+
+  # def user
+  #   self.object.user
+  # end
 
 end

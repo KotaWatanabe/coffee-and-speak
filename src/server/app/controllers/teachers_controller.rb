@@ -45,7 +45,7 @@ class TeachersController < ApplicationController
   
     def destroy
       @teacher.destroy
-      redirect_to root_path
+      redirect_to teachers_path
     end
 
     def teacher_dashboard
@@ -55,7 +55,7 @@ class TeachersController < ApplicationController
     private
   
     def teacher_params
-      params.require(:teacher).permit(:description, :price, :area, :tag_names)
+      params.require(:teacher).permit(:description, :price, :area, :address, :language_names)
     end
   
     def find_teacher

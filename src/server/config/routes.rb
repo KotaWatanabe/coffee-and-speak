@@ -33,5 +33,6 @@ Rails.application.routes.draw do
     resources :reviews, shallow: true, only: [:create, :destroy] do
     end
   end
+  resources :lessons,only:[:create, :destroy, :show, :edit, :update]
   
 end

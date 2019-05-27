@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 PASSWORD = "supersecret"
+Review.delete_all
+Teacher.delete_all
+User.delete_all
 
 super_user = User.create(
   first_name: "Jon",
@@ -15,4 +18,42 @@ super_user = User.create(
   password: PASSWORD
 )
 
-puts Cowsay.say("Login with #{super_user.email} and password: #{PASSWORD}", :koala)
+30.times do
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  User.create(
+    first_name: first_name,
+    last_name: last_name,
+    email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
+    password: PASSWORD
+  )
+end
+
+users = User.all
+tags = ["English", "Spanish", "French", "Chinese"]
+
+30.times do
+  created_at = Faker::Date.backward(365 * 1)
+  t = Teacher.create(
+    # Faker is ruby module. We are just accessing
+    # the class Hacker inside the module Faker
+    description: Faker::ChuckNorris.fact,
+    price: rand(20..35),
+    created_at: created_at,
+    updated_at: created_at,
+    user: users.sample
+  )
+      if t.valid?
+        t.reviews = rand(0..5).times.map do
+          Review.new(body: Faker::GreekPhilosophers.quote, user: users.sample)
+        end
+        t.tags = tags.sample
+      end
+end
+
+teachers = Teacher.all
+revuews = Review.all
+
+puts Cowsay.say("Login with #{ssemail} and password: #{PASSWORD}", :koala)
+puts Cowsay.say("Generated #{ teachers.count } teachers", :ghostbusters)
+puts Cowsay.say("Generated #{ reviews.count } reviews", :stegosaurus)

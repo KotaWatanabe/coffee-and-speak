@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_22_232305) do
+ActiveRecord::Schema.define(version: 2019_05_24_191846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,9 +68,21 @@ ActiveRecord::Schema.define(version: 2019_05_22_232305) do
     t.boolean "approved"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "aasm_state"
+    t.text "comment"
     t.index ["availability_id"], name: "index_lessons_on_availability_id"
     t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
     t.index ["user_id"], name: "index_lessons_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "teacher_id"
+    t.string "transaction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_payments_on_teacher_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -100,6 +112,9 @@ ActiveRecord::Schema.define(version: 2019_05_22_232305) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
@@ -119,6 +134,8 @@ ActiveRecord::Schema.define(version: 2019_05_22_232305) do
   add_foreign_key "lessons", "availabilities"
   add_foreign_key "lessons", "teachers"
   add_foreign_key "lessons", "users"
+  add_foreign_key "payments", "teachers"
+  add_foreign_key "payments", "users"
   add_foreign_key "reviews", "teachers"
   add_foreign_key "reviews", "users"
   add_foreign_key "teacher_languages", "languages"

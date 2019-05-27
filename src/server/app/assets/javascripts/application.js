@@ -17,5 +17,8 @@
 //= require bootstrap-sprockets
 //= require selectize
 //= require activestorage
-//= require_tree .
 //= main.js
+//= require underscore
+//= require gmaps/google
+//= require_tree .
+

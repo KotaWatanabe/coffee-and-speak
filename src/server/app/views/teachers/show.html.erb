@@ -1,61 +1,76 @@
 <div class="container-fluid padding">
   <div class="teacher-wrapper">
     <div class="teacher-profile-box">
-    <div class="card">
-      <div class="card-body">
-          <div class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
-        <div class="card-title">
-          <h3><%= @teacher.user.first_name %></h3>
-          <div class="card-text">
-              <p><%= @teacher.description %></p>
-              <p><%= @teacher.price %> CAD</p>
-              <p><%= @teacher.area %></p>
-              <% unless @teacher.languages.empty? %>
-                <div>
-                <% @teacher.languages.each do |language| %>
-                  <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
-                <% end %>
-                </div>
-              <% end %>  
-                <% if user_signed_in? && %>
-                  <% if @favourite.present? %>
-                    <%= link_to fa_icon('thumbs-up 3x'), favourite_path(@favourite) , method: :delete, style: 'color: blue;' %>
-                  <% else %>
-                    <%= link_to fa_icon('thumbs-up 3x'), teacher_favourites_path(@teacher), method: :post, style: 'color: lightgrey;' %>
-                  <% end %>
-                <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <% if false %>
+
+          <div class="teacher-box">
+            <div class="teacher-image"> 
+               <% if @teacher.user.avatar.attached? %>
+                  <%= image_tag url_for(@teacher.user.avatar) %>
+               <% else %>
+                  <%= image_tag("fake.jpeg") %>
+              <% end %>
+            </div><!--teacher-image-->
+          <div class="teacher-content">
+            <div class="teacher-description">
+              <h2><%= @teacher.user.full_name %></h2>
+                  <h3><%= @teacher.price %> CAD</h3>
+                  <h4><%= @teacher.description %></h4>
+                    <% if user_signed_in? && %>
+                      <% if @favourite.present? %>
+                        <%= link_to fa_icon('thumbs-up 2x'), favourite_path(@favourite) , method: :delete, style: 'color: blue;' %>
+                      <% else %>
+                        <%= link_to fa_icon('thumbs-up 2x'), teacher_favourites_path(@teacher), method: :post, style: 'color: lightgrey;' %>
+                      <% end %>
+                    <% end %>
+                      <% unless @teacher.languages.empty? %>
+                        <div>
+                          <% @teacher.languages.each do |language| %>
+                          <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
+                        </div>
+                          <% end %>
+                      <% end %>  
+                      <small>
+                         <%= link_to(
+                         "Delete",
+                         teacher_path(@teacher),
+                         method: :delete, data: {
+                           confirm: "Are you sure?"
+                         }
+                         ) %>
+                      </small>
+            </div>
+            <div class="teacher-map">
+            <!-----------------------map------------------------------>
+                  <div style='width: 600px;'>
+                    <div id="map" style='width: 600px; height: 400px;'></div>
+                  </div>
+
+                  <script>
+                    const handler = Gmaps.build('Google');
+                    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+                      markers = handler.addMarkers([
+                        {
+                          "lat": <%= @teacher.latitude %>,
+                          "lng": <%= @teacher.longitude %>,
+                          "infowindow": "<%= @teacher.user.first_name %>'s location"
+                        }
+                      ]);
+                      handler.bounds.extendWith(markers);
+                      handler.fitMapToBounds();
+                      handler.getMap().setZoom(12)
+                    });
+
+                  </script>
+            <!-----------------------map------------------------------>
+              </div>
+              </div><!--teacher-content-->
 
 
- <h3>Review</>
- <%= form_with(model: [@teacher, @review], local: true) do |f| %>
-    <% if @review.errors.present? %>
-      <p class="form-errors">
-        <%= @review.errors.full_messages.join(", ") %>
-      </p>
-    <% end %>
+              </div><!--teacher-box-->
 
-    <div class="form-group">
-      <%= f.text_area(
-      :body, cols: 50, rows: 5,
-      placeholder: "What are your thoughts...",
-      class: "form-control"
-      ) %><br>
-      <%= f.label :rating %>
-      <%= f.number_field :rating, in: 1..5 %>
-    </div>
-    <%= f.submit :submit %>
-  <% end %>
 
-<% end %>
-  <hr />
-
-  <h3> Reviews: </h3>
+            <hr />
+          <h3> Reviews: </h3>
 
     <ul class="review-list">
       <% @reviews.each do |review| %>
@@ -81,6 +96,7 @@
      </ul>
     </div>
 
+    </div><!--teacher-profile-box-->
     <div class="teacher-booking-box">
       <div class="row welcome text-center">
         <div class="col-12">
@@ -89,20 +105,56 @@
         </div>
       </div>
 
-        <%= form_with(model: @lesson, local: true) do |f| %>
-
-            <h4>Place: <%=@teacher.area%></h4>    
-
+         <!--form_with url: "/lessons", scope: "lesson" do |f| --> 
+        <%= form_with url: lessons_path, local: true do |f| %>
             <div class="form-group">
-                <%= f.label :Schedule, class:"form-label" %>
-                <%= f.number_field :schedule, class:"form-control",placeholder: 'When do you want to have a lesson' %>
-            </div> 
+                <%= f.label :comment, value:"Comment" %>
+                <%= f.text_area :comment, class: 'form-control', placeholder: 'Anything what you want to tell to the teachers' %>
+            </div>
               <h4>Price: <%=@teacher.price%>CAD</h4>              
               <p>Once Teacher approved, pay with your credit card</p>
 
-            <%= f.submit 'Book now', class: 'btn btn-warning col-12 col-md-3' %>
+            <%= f.submit 'Send Request!', class: 'btn btn-warning col-12 ' %>
         <% end %>
-    </div>
+    </div><!--"teacher-booking-box"-->
 
 
-</div>
+
+    </div><!--"teacher-wrapper"-->
+    
+
+
+
+
+
+
+
+</div><!--container-->
+
+
+
+
+                                    <% if false %>
+
+
+                                <h3>Review</>
+                                <%= form_with(model: [@teacher, @review], local: true) do |f| %>
+                                    <% if @review.errors.present? %>
+                                      <p class="form-errors">
+                                        <%= @review.errors.full_messages.join(", ") %>
+                                      </p>
+                                    <% end %>
+
+                                    <div class="form-group">
+                                      <%= f.text_area(
+                                      :body, cols: 50, rows: 5,
+                                      placeholder: "What are your thoughts...",
+                                      class: "form-control"
+                                      ) %><br>
+                                      <%= f.label :rating %>
+                                      <%= f.number_field :rating, in: 1..5 %>
+                                    </div>
+                                    <%= f.submit :submit %>
+                                  <% end %>
+
+                                <% end %>
