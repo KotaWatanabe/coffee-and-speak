@@ -20,8 +20,8 @@ class UsersController < ApplicationController
     end
   
     def update
-      #  @user.avatar.attach(params[:avatar])
-       if @user.update user_params        
+       
+       if @user.update user_params       
         flash[:success] = "Your profile was updated successfully!"
         redirect_to root_path
       else

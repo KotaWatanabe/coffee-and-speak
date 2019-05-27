@@ -12,6 +12,22 @@
 
         <div class="requested-box">
             <h2 class="text-center">Requested lesson</h2>
+               <% @requested_lessons.each do |lesson| %>
+                 <div class="row col-md-6 col-lg-4 mx-auto">
+                    <div class="card favourited-card">
+                        <div class="card-body">
+                          <span class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></span>
+                            <div class="card-title">
+                                <h3><%= lesson.user.full_name %> </h3><br />
+                                <p><%= lesson.comment %></p>
+                                <%= link_to fa_icon('thumbs-up'), favourite_path(teacher.favourite_ids) , method: :delete, style: 'color: blue;' %>
+                            </div>
+                            </p>
+                         </div>   
+                        </div>
+                    </div>  
+                </div>  
+               <% end %>
         </div>
 
     </div>

@@ -33,6 +33,14 @@ Rails.application.routes.draw do
     resources :reviews, shallow: true, only: [:create, :destroy] do
     end
   end
-  resources :lessons,only:[:create, :destroy, :show, :edit, :update]
+  resources :lessons,only:[:create, :destroy, :show, :edit, :update] do
+    member do
+      put :request
+      put :approve
+      put :decline
+      put :pay
+      put :finish
+    end
+  end
   
 end

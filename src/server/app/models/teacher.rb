@@ -1,12 +1,11 @@
 class Teacher < ApplicationRecord
-    belongs_to :user
-
     has_many :lessons, dependent: :destroy
-
+    belongs_to :user
+    
     has_many :favourites, dependent: :destroy
     has_many :favoriters, through: :favourites, source: :user
-
     has_many :users, through: :favourites
+   
     has_many :reviews, dependent: :destroy
 
     has_many :teacher_languages, dependent: :destroy

@@ -49,7 +49,8 @@ class TeachersController < ApplicationController
     end
 
     def teacher_dashboard
-
+        @teacher = current.user.teacher
+        @requested_lessons = @teacher.lessons
     end
   
     private

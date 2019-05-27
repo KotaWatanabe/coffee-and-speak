@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 PASSWORD = "supersecret"
-Review.delete_all
-Teacher.delete_all
+Review.destroy_all
+Teacher.destroy_all
 User.delete_all
 
 super_user = User.create(
@@ -18,7 +18,7 @@ super_user = User.create(
   password: PASSWORD
 )
 
-30.times do
+10.times do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   User.create(
@@ -30,9 +30,9 @@ super_user = User.create(
 end
 
 users = User.all
-tags = ["English", "Spanish", "French", "Chinese"]
 
-30.times do
+
+10.times do
   created_at = Faker::Date.backward(365 * 1)
   t = Teacher.create(
     # Faker is ruby module. We are just accessing
@@ -43,17 +43,19 @@ tags = ["English", "Spanish", "French", "Chinese"]
     updated_at: created_at,
     user: users.sample
   )
-      if t.valid?
-        t.reviews = rand(0..5).times.map do
-          Review.new(body: Faker::GreekPhilosophers.quote, user: users.sample)
-        end
-        t.tags = tags.sample
-      end
+      # if t.valid?
+      #   # t.reviews = rand(0..3).times.map do
+      #   #   Review.new(body: Faker::GreekPhilosophers.quote, user: users.sample)
+      #   # # end
+      #   # t.languages = rand(1..3).times.map do
+      #   #   Languages.new(name: languages.sample)
+      #   # end
+      # end
 end
 
 teachers = Teacher.all
-revuews = Review.all
+reviews = Review.all
 
-puts Cowsay.say("Login with #{ssemail} and password: #{PASSWORD}", :koala)
+# puts Cowsay.say("Login with #{email} and password: #{PASSWORD}", :koala)
 puts Cowsay.say("Generated #{ teachers.count } teachers", :ghostbusters)
-puts Cowsay.say("Generated #{ reviews.count } reviews", :stegosaurus)
+# puts Cowsay.say("Generated #{ reviews.count } reviews", :stegosaurus)
