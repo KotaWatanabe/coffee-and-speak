@@ -21,6 +21,7 @@ class TeachersController < ApplicationController
     end
   
     def index
+      @languages = Language.all
         if params[:language]
           @language = Language.find_or_initialize_by(name: params[:language])
           @teachers= @language.teachers.order(created_at: :DESC)
