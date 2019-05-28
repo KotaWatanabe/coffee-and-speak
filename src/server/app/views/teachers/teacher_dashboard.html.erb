@@ -1,7 +1,7 @@
 <div class="container-fluid padding">
   <div class="row welcome text-center">
 		<div class="col-12">
-            <h1>It's <%=current_user.first_name%>'s page</h1>
+            <h1>Lesson dashboard</h1>
         </div>
    </div>
     <div class="dashboard-wrapper">
@@ -13,20 +13,22 @@
         <div class="requested-box">
             <h2 class="text-center">Requested lesson</h2>
                <% @requested_lessons.each do |lesson| %>
-                 <div class="row col-md-6 col-lg-4 mx-auto">
-                    <div class="card favourited-card">
-                        <div class="card-body">
-                          <span class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></span>
-                            <div class="card-title">
-                                <h3><%= lesson.user.full_name %> </h3><br />
-                                <p><%= lesson.comment %></p>
-                                <%= link_to fa_icon('thumbs-up'), favourite_path(teacher.favourite_ids) , method: :delete, style: 'color: blue;' %>
-                            </div>
-                            </p>
-                         </div>   
+                <div class="text-center"> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
+                  <div class="text-center">
+                      <h3><%= lesson.user.full_name %> </h3><br />
+                      <p><%= lesson.comment %></p>
+
+                     <%= form_for lesson, url: approve_lesson_path, :method => :PUT, local: true do |f| %>
+
+                        <div class="form-group">
+                            <%= f.label :description,  value="Message", class:"form-label" %>
+                            <%= f.text_area :description, class:"form-control",
+                            placeholder: 'Send message' %>
                         </div>
-                    </div>  
-                </div>  
+
+                        <%= f.submit 'Approve!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
+                    <% end %>
+              
                <% end %>
         </div>
 

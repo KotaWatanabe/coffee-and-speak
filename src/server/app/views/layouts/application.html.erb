@@ -32,7 +32,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'dropdown-item'%>
                   <%= link_to 'My Dashbord', dashboard_user_path(current_user), class: "dropdown-item" %>
-                  <%= link_to 'Teacher Page', teacher_dashboard_teacher_path(current_user), class: "dropdown-item" %>
+                  <%= link_to 'Teacher Page', teacher_dashboard_teacher_path(current_user.teacher), class: "dropdown-item" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'Find Teacher', teachers_path, class: "nav-link" %>

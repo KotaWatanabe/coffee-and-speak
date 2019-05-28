@@ -2,12 +2,13 @@ class User < ApplicationRecord
     has_one_attached :avatar
     has_secure_password
 
+    has_one :teacher, dependent: :destroy
     has_many :favourites, dependent: :destroy
     has_many :favourited_teachers, through: :favourites, source: :teacher
     
-    has_many :users, through: :favourites
+    has_many :teachers, through: :favourites
     
-    has_one :teachers, dependent: :destroy
+
     has_many :reviews, dependent: :nullify
 
     

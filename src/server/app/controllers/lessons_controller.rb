@@ -11,6 +11,7 @@ class LessonsController < ApplicationController
         @lesson.teacher = @teacher
          if @lesson.save
             @lesson.request
+            @lesson.save
             flash[:success] = "Registration successful!"
             redirect_to dashboard_user_path(current_user)
         else
