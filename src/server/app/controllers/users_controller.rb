@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :find_user, only: [:edit, :update, :change_password, :update_password]
+    before_action :find_user, only: [:edit, :update, :change_password, :update_password, :dashboard]
 
     def new 
       @user = User.new
@@ -51,6 +51,8 @@ class UsersController < ApplicationController
     def dashboard
       @favourited_teachers = current_user.favourited_teachers.order("favourites.created_at DESC")
       @teacher = current_user.favourited_teachers
+
+      @approved_lessons = @user.lessons.where(aasm_state: "approved")
     end
 
     private

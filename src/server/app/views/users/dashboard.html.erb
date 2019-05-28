@@ -8,6 +8,14 @@
 
         <div class="lesson-box">
             <h2 class="text-center" >Your Upcoming class</h2>
+                <% @approved_lessons.each do |lesson| %>
+                    <div class="text-center"> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
+                    <div class="text-center">
+                        <h3><%= lesson.teacher.user.full_name %> </h3><br />
+                        <p><%= lesson.comment %></p>
+                    </div>
+               
+                <% end %>
         </div>
 
         <div class="favourite-box">
