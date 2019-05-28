@@ -34,7 +34,6 @@ class LessonsController < ApplicationController
 
     def approve
         @lesson = Lesson.find(params[:lesson])
-        # @lesson.teacher = current_user
         @id = params[:user]
         @user = User.find(@id)
         @lesson.user = @user
@@ -47,9 +46,23 @@ class LessonsController < ApplicationController
             render :new
         end
     end
+
+    def pay
+        @lesson = Lesson.find(params[:lesson])
+        @id = params[:teacher]
+        @teacher = Teacher.find(@id)
+        @lesson.user = User.find(params[:id])
+         if @lesson.update lesson_params
+            # @lesson.pay
+            # @lesson.update lesson_params
+            redirect_to new_lesson_payment_path(@lesson)
+        else
+            render :root_path
+        end
+    end
     
 
-    before_action :set_lesson, only: [:run, :stop, :resolve]
+    # before_action :set_lesson, only: [:run, :stop, :resolve]
 
     # def request
     #   redirect_to lessons_path if @lesson.request!
@@ -73,9 +86,9 @@ class LessonsController < ApplicationController
   
     private
   
-      def set_lesson
-        @lesson = Lesson.find(params[:id])
-      end
+    #   def set_lesson
+    #     @lesson = Lesson.find(params[:id])
+    #   end
 
     def lesson_params
         params.permit(:comment)

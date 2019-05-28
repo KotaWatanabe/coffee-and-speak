@@ -11,6 +11,8 @@ class Teacher < ApplicationRecord
     has_many :teacher_languages, dependent: :destroy
     has_many :languages, through: :teacher_languages
 
+    has_many :payments, dependent: :destroy
+
 
   def language_names
     self.languages.map{ |l| l.name }.join(",")

@@ -8,12 +8,51 @@
 
         <div class="lesson-box">
             <h2 class="text-center" >Your Upcoming class</h2>
+                <% @confirmed_lessons.each do |lesson| %>
+                    <div class="teacher-box">        
+                        <div class=teacher-image> 
+                                <% if lesson.teacher.user.avatar.attached? %>
+                                    <%= image_tag lesson.teacher.user.avatar %>
+                                <% else %>
+                                    <%= image_tag("fake.jpeg") %>
+                                <% end %>
+                        </div>
+                        <div class="teacher-content">
+                            <p>Teacher's Name<p>
+                            <h3> <%= lesson.teacher.user.full_name %> </h3><br />
+                            <p><p>Answer from Teacher<p><%= lesson.comment %></p>
+                        </div>
+                    </div>               
+                <% end %>
+
+
+            <h2 class="text-center" >Pay and Confirm!</h2>
                 <% @approved_lessons.each do |lesson| %>
-                    <div class="text-center"> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
-                    <div class="text-center">
-                        <h3><%= lesson.teacher.user.full_name %> </h3><br />
-                        <p><%= lesson.comment %></p>
+                    <div class="teacher-box">        
+                        <div class=teacher-image> 
+                                <% if lesson.teacher.user.avatar.attached? %>
+                                    <%= image_tag lesson.teacher.user.avatar %>
+                                <% else %>
+                                    <%= image_tag("fake.jpeg") %>
+                                <% end %>
+                        </div>
+                        <div class="teacher-content">
+                            <p>Teacher's Name<p>
+                            <h3> <%= lesson.teacher.user.full_name %> </h3><br />
+                            <p><p>Answer from Teacher<p><%= lesson.comment %></p>
+                        </div>
                     </div>
+                    
+
+                     <%= form_with url: pay_lesson_path, :method => :PUT, local: true do |f| %>
+
+                        <div class="form-group">
+                        <%= f.hidden_field :lesson, value: lesson.id %>
+                        <%= f.hidden_field :teacher, value: lesson.teacher.id %>
+                        <%= f.hidden_field :comment, value: lesson.comment %>
+                        </div>
+                        <%= f.submit 'Pay now!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
+                    <% end %>
                
                 <% end %>
         </div>
@@ -22,21 +61,24 @@
             <h2 class="text-center" >Your favourited teachers</h2>
             <div class="row teachers-row">
                 <% @favourited_teachers.each do |teacher| %>
-                <div class="row col-md-6 col-lg-4 mx-auto">
-                    <div class="card favourited-card">
-                        <div class="card-body">
-                          <span class=teacher-image> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></span>
-                            <div class="card-title">
+                        <div class="teacher-box">
+                          <div class=teacher-image> 
+                            <% if teacher.user.avatar.attached? %>
+                                <%= image_tag teacher.user.avatar %>
+                            <% else %>
+                                <%= image_tag("fake.jpeg") %>
+                            <% end %>
+                          </div>
+                            <div class="teacher-content">
                                 <h3><%= link_to(teacher.user.first_name, teacher_path(teacher)) %> </h3><br />
-                                <p><%=teacher.price %> CAD</p>
-                                <%= link_to fa_icon('thumbs-up'), favourite_path(teacher.favourite_ids) , method: :delete, style: 'color: blue;' %>
+                                <h3><%= teacher.price %> CAD</h3>
+                                <h4><%= teacher.description %></h4>
+                                
+                                <%= link_to fa_icon('thumbs-up 2x'), favourite_path(teacher.favourite_ids) , method: :delete, style: 'color: blue;' %>
                             </div>
-                            </p>
-                         </div>   
-                        </div>
-                    </div>  
-                </div>  
-            <% end %>
+
+                        </div>  
+                <% end %>
             </div>
         </div>
 

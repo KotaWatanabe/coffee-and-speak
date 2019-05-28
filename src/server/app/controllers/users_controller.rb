@@ -53,6 +53,7 @@ class UsersController < ApplicationController
       @teacher = current_user.favourited_teachers
 
       @approved_lessons = @user.lessons.where(aasm_state: "approved")
+      @confirmed_lessons = @user.lessons.where(aasm_state: "payed")
     end
 
     private

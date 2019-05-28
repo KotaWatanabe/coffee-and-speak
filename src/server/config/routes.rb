@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       put :pay
       put :finish
     end
+    resources :payments, only: [:new, :create]
   end
   
 end

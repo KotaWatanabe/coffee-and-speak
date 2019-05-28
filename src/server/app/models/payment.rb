@@ -1,6 +1,7 @@
 class Payment < ApplicationRecord
-  belongs_to :user, foreign_key: :sender_id
-  belongs_to :teacher, foreign_key: :receiver_id
+  belongs_to :user
+  belongs_to :teacher
+  belongs_to :lesson
 end
 
 # belongs_to :sender, class_name: 'User', foreign_key: :sender_id

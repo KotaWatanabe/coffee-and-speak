@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
     
     has_many :lessons, dependent: :destroy
+
+    has_many :payments, dependent: :destroy
    
     validates(:email, presence: true, uniqueness: true, format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
 
