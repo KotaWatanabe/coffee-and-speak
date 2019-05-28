@@ -18,14 +18,15 @@
                       <h3><%= lesson.user.full_name %> </h3><br />
                       <p><%= lesson.comment %></p>
 
-                     <%= form_for lesson, url: approve_lesson_path, :method => :PUT, local: true do |f| %>
+                     <%= form_with url: approve_lesson_path, :method => :PUT, local: true do |f| %>
 
                         <div class="form-group">
-                            <%= f.label :description,  value="Message", class:"form-label" %>
-                            <%= f.text_area :description, class:"form-control",
+                            <%= f.label :comment,  value="Message", class:"form-label" %>
+                            <%= f.text_area :comment, class:"form-control",
                             placeholder: 'Send message' %>
+                        <%= f.hidden_field :lesson, value: lesson.id %>
+                        <%= f.hidden_field :user, value: lesson.user.id %>
                         </div>
-
                         <%= f.submit 'Approve!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
                     <% end %>
               

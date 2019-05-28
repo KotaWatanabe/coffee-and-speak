@@ -53,10 +53,6 @@ class TeachersController < ApplicationController
         @requested_lessons = @teacher.lessons.where(aasm_state: "requested")
     end
 
-    def approve
-      
-    end
-  
     private
   
     def teacher_params

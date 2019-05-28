@@ -32,6 +32,23 @@ class LessonsController < ApplicationController
 
     end
 
+    def approve
+        @lesson = Lesson.find(params[:lesson])
+        # @lesson.teacher = current_user
+        @id = params[:user]
+        @user = User.find(@id)
+        @lesson.user = @user
+         if @lesson.update lesson_params
+            @lesson.approve
+            @lesson.update lesson_params
+            flash[:success] = "Registration successful!"
+            redirect_to dashboard_user_path(current_user)
+        else
+            render :new
+        end
+    end
+    
+
     before_action :set_lesson, only: [:run, :stop, :resolve]
 
     # def request
