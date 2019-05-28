@@ -20,10 +20,10 @@ class UsersController < ApplicationController
     end
   
     def update
-       
+      #  byebug
        if @user.update user_params       
         flash[:success] = "Your profile was updated successfully!"
-        redirect_to root_path
+        redirect_to dashboard_user_path(@user)
       else
         render :edit
       end
