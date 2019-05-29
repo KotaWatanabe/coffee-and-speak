@@ -48,6 +48,7 @@
                         <div class="teacher-content">
                             <p>User's Name<p>
                             <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3>
+                            <p>Comment: <%=lesson.comment%></p>
                         </div>
                     </div>               
         
@@ -55,11 +56,12 @@
                      <%= form_with url: approve_lesson_path, :method => :PUT, local: true do |f| %>
 
                         <div class="form-group">
-                            <%= f.label :comment,  value="Message", class:"form-label" %>
-                            <%= f.text_area :comment, class:"form-control",
+                            <%= f.label :answer,  value="Message", class:"form-label" %>
+                            <%= f.text_area :answer, class:"form-control",
                             placeholder: 'Send message' %>
                             <%= f.hidden_field :lesson, value: lesson.id %>
                             <%= f.hidden_field :user, value: lesson.user.id %>
+                            <%= f.hidden_field :comment, value: lesson.comment %>
                         </div>
                         <%= f.submit 'Approve!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
                     <% end %>
@@ -82,7 +84,8 @@
                         <div class="teacher-content">
                             <p>Student's Name<p>
                             <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3><br />
-                            <p><p>Answer from Teacher<p><%= lesson.comment %></p>
+                            <p>Message from student: <%= lesson.answer %></p>
+                            <p>Answer from Teacher: <%= lesson.answer %></p>
                         </div>
                     </div>
             <% end %>

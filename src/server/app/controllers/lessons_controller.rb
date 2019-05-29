@@ -53,7 +53,7 @@ class LessonsController < ApplicationController
             @lesson.approve
             @lesson.update lesson_params
             flash[:success] = "Registration successful!"
-            redirect_to dashboard_user_path(current_user)
+            redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
         else
             render :new
         end
@@ -102,6 +102,6 @@ class LessonsController < ApplicationController
     #   end
 
     def lesson_params
-        params.permit(:comment)
+        params.permit(:comment, :answer)
     end
 end

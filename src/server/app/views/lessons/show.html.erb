@@ -29,6 +29,8 @@
                         </div>
                           <% end %>
                       <% end %>  
+                      <p>Message from Student: <%= @lesson.comment%></p>
+                      <p>Answer from Teacher: <%= @lesson.answer%></p>
                       <small>
                          <%= link_to(
                          "Delete",

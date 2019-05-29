@@ -15,8 +15,12 @@
               <h2><%= @teacher.user.full_name %></h2>
                   <h3><%= @teacher.price %> CAD</h3>
                   <h4><%= @teacher.description %></h4>
+
+                  <% unless @teacher.reviews.empty? %>
                   <p>Review: <%=@avg_rating%></p>
-                  
+                  <% else %>
+                  <p>0 reviews</p>
+                  <% end %>
                     <% if user_signed_in? && %>
                       <% if @favourite.present? %>
                         <%= link_to fa_icon('thumbs-up 2x'), favourite_path(@favourite) , method: :delete, style: 'color: blue;' %>
