@@ -87,29 +87,13 @@ class LessonsController < ApplicationController
             render :root_path
         end
     end
-    
 
-    # before_action :set_lesson, only: [:run, :stop, :resolve]
+    def done
+        # @lesson = Lesson.find(params[:lesson])
+        # @lesson.done
+        # @lesson.update lesson_params
+    end
 
-    # def request
-    #   redirect_to lessons_path if @lesson.request!
-    # end
-  
-    # def approve
-    #   redirect_to calls_path if @call.approve!
-    # end
-  
-    # def decline
-    #   redirect_to calls_path if @call.decline!
-    # end
-
-    # def pay
-    #   redirect_to calls_path if @call.pay!
-    # end
-
-    # def finish
-    #   redirect_to calls_path if @call.finish!
-    # end
   
     private
   

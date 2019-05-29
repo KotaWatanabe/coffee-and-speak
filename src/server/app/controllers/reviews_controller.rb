@@ -10,12 +10,15 @@ class ReviewsController < ApplicationController
         @review.teacher = @teacher
         @review.user = current_user
         if @review.save
+            @lesson.done
+            @lesson.update lesson_params
+            # byebug
             # ReviewMailer.new_review(@review).deliver_later(wait: 30.seconds)
             # # ReviewMailer.new_review(@review).deliver_now
             redirect_to teacher_path(@teacher)
         else
             @reviews = @teacher.reviews.order(created_at: :desc)
-            render 'teachers/show'
+            render root_path
         end
     end
 
@@ -38,6 +41,10 @@ class ReviewsController < ApplicationController
 
     def find_review
         @review = Review.find(params[:id])
+    end
+
+    def lesson_params
+        params.permit()
     end
 
 end

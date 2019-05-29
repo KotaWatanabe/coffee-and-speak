@@ -13,6 +13,7 @@ class Lesson < ApplicationRecord
     state :declined
     state :payed
     state :finished
+    state :done
 
     event :request do
       transitions from: :empty, to: :requested
@@ -32,6 +33,10 @@ class Lesson < ApplicationRecord
 
     event :finish do
       transitions from: :payed, to: :finished
+    end
+
+    event :done do
+      transitions from: :finished, to: :done
     end
 
   end

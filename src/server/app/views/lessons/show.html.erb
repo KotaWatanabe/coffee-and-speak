@@ -103,6 +103,7 @@
                            <%= f.label :rating %>
                            <%= f.number_field :rating, in: 1..5 %>
                            <%= f.hidden_field :lesson, value: params[:id] %>
+                           <%= f.hidden_field :comment, value:"just for hidden field" %>
                          </div>
                          <%= f.submit 'Submit', class: 'btn btn-warning col-4 text-center'  %>
                        <% end %>
