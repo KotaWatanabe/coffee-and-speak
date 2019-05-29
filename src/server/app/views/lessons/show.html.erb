@@ -45,8 +45,9 @@
                          ) %>
                       </small>
 
-                      <p>If this lesson is already finished, please click "Finish" button</p>  
+                     
                           <% if @lesson.aasm_state === "payed" %>
+                           <p>If this lesson is already finished, please click "Finish" button</p>  
                             <%= form_with url: finish_lesson_path, :method => :PUT, local: true do |f| %>
                             <div class="form-group">
                               <%= f.hidden_field :lesson, value: @lesson.id %>
@@ -83,7 +84,28 @@
                   </script>
             <!-----------------------map------------------------------>
               </div>
+
               </div><!--teacher-content-->
 
 
-              </div><!--teacher-box-->
+    </div><!--teacher-box-->
+
+
+                  <% if @lesson.aasm_state === "finished" %>    
+                    <h3>Write lesson review</h3>
+                     <%= form_with url: teacher_reviews_path(@lesson.teacher), local: true do |f| %>
+                         <div class="form-group">
+                           <%= f.text_area(
+                           :body, cols: 30, rows: 3,
+                           placeholder: "How did you think about your lesson",
+                           class: "form-control"
+                           ) %><br>
+                           <%= f.label :rating %>
+                           <%= f.number_field :rating, in: 1..5 %>
+                           <%= f.hidden_field :lesson, value: params[:id] %>
+                         </div>
+                         <%= f.submit 'Submit', class: 'btn btn-warning col-4 text-center'  %>
+                       <% end %>
+                  <% end %>
+
+</div>

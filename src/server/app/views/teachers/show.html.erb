@@ -81,7 +81,6 @@
     <ul class="review-list">
       <% @reviews.each do |review| %>
         <li>
-          <p>
           <p>Rating: <%= review.rating %></p><br />
            <p><%= review.body %> </p> <br />
           <small>
@@ -94,9 +93,8 @@
             ) %>
           </small>
           <small>
-            Reviewd <%= time_ago_in_words(review.created_at) %> ago
+            Reviewd<%= time_ago_in_words(review.created_at) %> ago by <%= review.user.full_name %>
           </small>
-        </p>
         </li>
       <% end %>
      </ul>

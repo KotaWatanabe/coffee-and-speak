@@ -125,7 +125,7 @@
                             <% end %>
                           </div>
                             <div class="teacher-content">
-                                <h3><%= link_to(lesson.teacher.user.first_name, teacher_path(lesson.teacher)) %> </h3><br />
+                                 <h3><%= link_to lesson.teacher.user.full_name, lesson_path(lesson)%></h3><br />
                                 <h3><%= lesson.teacher.price %> CAD</h3>
                                 <h4><%= lesson.teacher.description %></h4>
                             </div>

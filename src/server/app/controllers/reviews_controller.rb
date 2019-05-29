@@ -4,7 +4,8 @@ class ReviewsController < ApplicationController
     # before_action :authorize, only: [:edit,:update, :destroy]
 
     def create
-        @teacher = Teacher.find(params[:teacher_id])
+        @lesson = Lesson.find(params[:lesson])
+        @teacher = @lesson.teacher
         @review = Review.new review_params
         @review.teacher = @teacher
         @review.user = current_user
@@ -27,16 +28,16 @@ class ReviewsController < ApplicationController
 
     private
     def review_params
-        params.require(:review).permit(:body, :rating)
+        params.permit(:body, :rating)
     end
 
     def authorize
         redirect_to root_path, alert: 'Not Authorized' unless can?(:crud, @review)
+
     end
 
     def find_review
         @review = Review.find(params[:id])
     end
-end
 
 end
