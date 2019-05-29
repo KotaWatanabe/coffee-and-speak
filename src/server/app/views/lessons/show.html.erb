@@ -15,6 +15,10 @@
                   <%= image_tag("default.png") %>
               <% end %>
             </div><!--teacher-image-->
+
+            <div class="lesson-state">
+             <%= @lesson.aasm_state %>
+            </div>
           <div class="teacher-content">
             <div class="teacher-description">
                   <h3><%= @teacher.price %> CAD</h3>
@@ -40,6 +44,20 @@
                         edit_lesson_path(@lesson)
                          ) %>
                       </small>
+
+                      <p>If this lesson is already finished, please click "Finish" button</p>  
+                          <% if @lesson.aasm_state === "payed" %>
+                            <%= form_with url: finish_lesson_path, :method => :PUT, local: true do |f| %>
+                            <div class="form-group">
+                              <%= f.hidden_field :lesson, value: @lesson.id %>
+                              <%= f.hidden_field :teacher, value: @lesson.teacher.id %>
+                              <%= f.hidden_field :user, value: @lesson.user.id %>
+                              <%= f.hidden_field :comment, value: @lesson.comment %>
+                            </div>
+                            <%= f.submit 'Completed', class: 'btn btn-warning col-6 col-md-3' %>
+                        <% end %>
+                    <% end %>
+
             </div>
             <div class="teacher-map">
             <!-----------------------map------------------------------>

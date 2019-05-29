@@ -38,6 +38,12 @@ class LessonsController < ApplicationController
 
     end
 
+    def destroy
+        @lesson = Lesson.new lesson_params
+        @lesson.destroy
+        redirect_to dashboard_user_path(current_user)
+      end
+
     def approve
         @lesson = Lesson.find(params[:lesson])
         @id = params[:user]
@@ -59,8 +65,6 @@ class LessonsController < ApplicationController
         @teacher = Teacher.find(@id)
         @lesson.user = User.find(params[:id])
          if @lesson.update lesson_params
-            # @lesson.pay
-            # @lesson.update lesson_params
             redirect_to new_lesson_payment_path(@lesson)
         else
             render :root_path
@@ -69,13 +73,16 @@ class LessonsController < ApplicationController
 
     def finish
         @lesson = Lesson.find(params[:lesson])
-        @id = params[:teacher]
-        @teacher = Teacher.find(@id)
-        @lesson.user = User.find(params[:id])
+        @teacher_id = params[:teacher]
+        @teacher = Teacher.find(@teacher_id)
+        @lesson.teacher = @teacher
+        @user_id = params[:user]
+        @user = User.find(@user_id)
+        @lesson.user = @user
          if @lesson.update lesson_params
-            # @lesson.pay
-            # @lesson.update lesson_params
-            redirect_to new_lesson_payment_path(@lesson)
+            @lesson.finish
+            @lesson.update lesson_params
+            redirect_to teacher_dashboard_teacher_path(@teacher)
         else
             render :root_path
         end

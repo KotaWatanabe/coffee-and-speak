@@ -78,7 +78,7 @@
                         </div>
                         <div class="teacher-content">
                             <p>Teacher's Name<p>
-                            <h3> <%= lesson.teacher.user.full_name %> </h3><br />
+                            <h3><%= link_to lesson.teacher.user.full_name, lesson_path(lesson)%></h3><br />
                             <p><p>Answer from Teacher<p><%= lesson.comment %></p>
                         </div>
                     </div>
@@ -104,6 +104,30 @@
                                 <h4><%= teacher.description %></h4>
                                 
                                 <%= link_to fa_icon('thumbs-up 2x'), favourite_path(teacher.favourite_ids) , method: :delete, style: 'color: blue;' %>
+                            </div>
+
+                        </div>  
+                <% end %>
+            </div>
+            <!-----------------review------------------->
+            <h2 class="text-center" >write review for finished lesson!</h2>
+            <div class="row teachers-row">
+            <% if @finished_lessons.length === 0 %>
+                <p class="text-center">You don't have copleted lesson</p>
+             <% end %>
+                <% @finished_lessons.each do |lesson| %>
+                        <div class="teacher-box">
+                          <div class=teacher-image> 
+                            <% if lesson.teacher.user.avatar.attached? %>
+                                <%= image_tag lesson.teacher.user.avatar %>
+                            <% else %>
+                                <%= image_tag("default.png") %>
+                            <% end %>
+                          </div>
+                            <div class="teacher-content">
+                                <h3><%= link_to(lesson.teacher.user.first_name, teacher_path(lesson.teacher)) %> </h3><br />
+                                <h3><%= lesson.teacher.price %> CAD</h3>
+                                <h4><%= lesson.teacher.description %></h4>
                             </div>
 
                         </div>  

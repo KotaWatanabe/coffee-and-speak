@@ -58,6 +58,28 @@
                         <%= f.submit 'Approve!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
                     <% end %>
                <% end %>
+
+               <hr>
+            <h2 class="text-center" >Waiting for pay confirmation</h2>
+            <% if @approved_lessons.length === 0 %>
+                <p class="text-center">There is no class that apporved by teacher</p>
+             <% end %>
+                <% @approved_lessons.each do |lesson| %>
+                    <div class="teacher-box">        
+                        <div class=teacher-image> 
+                                <% if lesson.user.avatar.attached? %>
+                                    <%= image_tag lesson.teacher.user.avatar %>
+                                <% else %>
+                                    <%= image_tag("default.png") %>
+                                <% end %>
+                        </div>
+                        <div class="teacher-content">
+                            <p>Student's Name<p>
+                            <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3><br />
+                            <p><p>Answer from Teacher<p><%= lesson.comment %></p>
+                        </div>
+                    </div>
+            <% end %>
         </div>
 
     </div>

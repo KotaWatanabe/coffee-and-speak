@@ -55,6 +55,7 @@ class UsersController < ApplicationController
       @requested_lessons = @user.lessons.where(aasm_state: "requested")
       @approved_lessons = @user.lessons.where(aasm_state: "approved")
       @confirmed_lessons = @user.lessons.where(aasm_state: "payed")
+      @finished_lessons = @user.lessons.where(aasm_state: "finished")
     end
 
     private
