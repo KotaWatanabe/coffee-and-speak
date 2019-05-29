@@ -18,6 +18,8 @@ class TeachersController < ApplicationController
       @review = Review.new
       @reviews = @teacher.reviews.order(created_at: :desc)
       @favourite = @teacher.favourites.find_by_user_id current_user if user_signed_in?
+
+      @avg_rating = @teacher.reviews.average(:rating).floor(2).to_f
     end
   
     def index

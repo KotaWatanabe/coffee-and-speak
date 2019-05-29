@@ -8,8 +8,11 @@
 
         <div class="lesson-box">
             <h2 class="text-center" >Your Upcoming class</h2>
+             <% if @approved_lessons.length > 0 && @confirmed_lessons.length === 0 %>
+                <p class="text-center">Please pay to confirm your lesson</p>
+             <% end %>
              <% if @confirmed_lessons.length === 0 %>
-                <p class="text-center">There is no confirmed class</p>
+                <p class="text-center">You don't have any confirmed class</p>
              <% end %>
                 <% @confirmed_lessons.each do |lesson| %>
                     <div class="teacher-box">        
@@ -30,9 +33,12 @@
                 <hr>
 
 
-            <h2 class="text-center" >Pay and Confirm!</h2>
-            <% if @approved_lessons.length === 0 %>
-                <p class="text-center">There is no class that apporved by teacher</p>
+            <h2 class="text-center" >Your Approved lessons</h2>
+            <% if @requested_lessons.length > 0 && @approved_lessons.length === 0  %>
+                <p class="text-center">Waiting for teacher approval</p>
+             <% end %>
+            <% if @approved_lessons.length === 0  %>
+                <p class="text-center">You don't have any approved lesson</p>
              <% end %>
                 <% @approved_lessons.each do |lesson| %>
                     <div class="teacher-box">        
@@ -63,9 +69,9 @@
                
                 <% end %>
                 <hr>
-            <h2 class="text-center" >Waiting for approval by teacher</h2>
+            <h2 class="text-center" >Your requested lessons</h2>
             <% if @requested_lessons.length === 0 %>
-                <p class="text-center">Your requested lessons</p>
+                <p class="text-center">You don't have any requested lesson</p>
              <% end %>
                 <% @requested_lessons.each do |lesson| %>
                     <div class="teacher-box">        
@@ -88,7 +94,9 @@
 
         <div class="favourite-box">
             <h2 class="text-center" >Your favourited teachers</h2>
-            <div class="row teachers-row">
+                <% if @favourited_teachers.length === 0 %>
+                    <p class="text-center">You don't have favourited teacher</p>
+                <% end %>
                 <% @favourited_teachers.each do |teacher| %>
                         <div class="teacher-box">
                           <div class=teacher-image> 
@@ -108,10 +116,9 @@
 
                         </div>  
                 <% end %>
-            </div>
+            <hr>
             <!-----------------review------------------->
-            <h2 class="text-center" >write review for finished lesson!</h2>
-            <div class="row teachers-row">
+            <h2 class="text-center" >Review for finished lesson!</h2>
             <% if @finished_lessons.length === 0 %>
                 <p class="text-center">You don't have copleted lesson</p>
              <% end %>
@@ -132,7 +139,7 @@
 
                         </div>  
                 <% end %>
-            </div>
+  
         </div>
 
     </div>

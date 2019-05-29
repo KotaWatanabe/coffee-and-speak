@@ -49,6 +49,15 @@
                                 </div>
                                 <% end %>
                                  <% end %>  
+                                <% unless teacher.reviews.empty? %>
+                                    <div>
+                                        <p><%=teacher.reviews.length%> reviews</p>
+                                        Review:<p><%= teacher.reviews.average(:rating).floor(2).to_f%></p> 
+                                        <% teacher.reviews.average(:rating).to_i.times do  %>
+                                         <span class="glyphicon glyphicon-star"></span>
+                                        <% end %>
+                                    </div>
+                                 <% end %>  
                                     <small>
                                     Posted <%= time_ago_in_words(teacher.created_at)  %> ago
                                     </small>

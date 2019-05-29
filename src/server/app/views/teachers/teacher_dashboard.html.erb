@@ -8,8 +8,11 @@
 
         <div class="lesson-box">
             <h2 class="text-center" >Your Upcoming lesson</h2>
+                <% if @approved_lessons.length > 0 && @payed_lessons.length === 0 %>
+                    <p class="text-center">Waiting for payment from student</p>
+                <% end %>
                 <% if @payed_lessons.length === 0 %>
-                    <p class="text-center">There is no confirmed class</p>
+                    <p class="text-center">You don't have any confirmed lesson</p>
                 <% end %>
                 <% @payed_lessons.each do |lesson| %>
                     <div class="teacher-box">        
@@ -30,6 +33,9 @@
 
         <div class="requested-box">
             <h2 class="text-center">Requested lesson</h2>
+                <% if @payed_lessons.length === 0 %>
+                    <p class="text-center">You don't have any requested lesson</p>
+                <% end %>
                <% @requested_lessons.each do |lesson| %>
                     <div class="teacher-box">        
                         <div class=teacher-image> 
@@ -62,7 +68,7 @@
                <hr>
             <h2 class="text-center" >Waiting for pay confirmation</h2>
             <% if @approved_lessons.length === 0 %>
-                <p class="text-center">There is no class that apporved by teacher</p>
+                <p class="text-center">You don't have any payment status lesson</p>
              <% end %>
                 <% @approved_lessons.each do |lesson| %>
                     <div class="teacher-box">        
