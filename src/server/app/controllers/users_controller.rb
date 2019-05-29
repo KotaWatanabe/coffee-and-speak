@@ -52,6 +52,7 @@ class UsersController < ApplicationController
       @favourited_teachers = current_user.favourited_teachers.order("favourites.created_at DESC")
       @teacher = current_user.favourited_teachers
 
+      @requested_lessons = @user.lessons.where(aasm_state: "requested")
       @approved_lessons = @user.lessons.where(aasm_state: "approved")
       @confirmed_lessons = @user.lessons.where(aasm_state: "payed")
     end

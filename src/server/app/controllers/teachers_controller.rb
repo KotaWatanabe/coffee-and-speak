@@ -52,6 +52,7 @@ class TeachersController < ApplicationController
     def teacher_dashboard
         @teacher = current_user.teacher
         @requested_lessons = @teacher.lessons.where(aasm_state: "requested")
+        @payed_lessons = @teacher.lessons.where(aasm_state: "payed")
     end
 
     private

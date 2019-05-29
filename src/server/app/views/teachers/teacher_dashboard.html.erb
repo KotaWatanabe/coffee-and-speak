@@ -8,15 +8,43 @@
 
         <div class="lesson-box">
             <h2 class="text-center" >Your Upcoming lesson</h2>
+                <% if @payed_lessons.length === 0 %>
+                    <p class="text-center">There is no confirmed class</p>
+                <% end %>
+                <% @payed_lessons.each do |lesson| %>
+                    <div class="teacher-box">        
+                        <div class=teacher-image> 
+                          <% if lesson.teacher.user.avatar.attached? %>
+                              <%= image_tag lesson.teacher.user.avatar %>
+                          <% else %>
+                              <%= image_tag("default.png") %>
+                          <% end %>
+                        </div>
+                        <div class="teacher-content">
+                            <p>User's Name<p>
+                           <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3>
+                        </div>
+                    </div>               
+                <% end %>
         </div>
 
         <div class="requested-box">
             <h2 class="text-center">Requested lesson</h2>
                <% @requested_lessons.each do |lesson| %>
-                <div class="text-center"> <%= fa_icon "user 5x", style: 'color: lightgrey;'%></div>
-                  <div class="text-center">
-                      <h3><%= lesson.user.full_name %> </h3><br />
-                      <p><%= lesson.comment %></p>
+                    <div class="teacher-box">        
+                        <div class=teacher-image> 
+                          <% if lesson.user.avatar.attached? %>
+                              <%= image_tag lesson.user.avatar %>
+                          <% else %>
+                              <%= image_tag("default.png") %>
+                          <% end %>
+                        </div>
+                        <div class="teacher-content">
+                            <p>User's Name<p>
+                            <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3>
+                        </div>
+                    </div>               
+        
 
                      <%= form_with url: approve_lesson_path, :method => :PUT, local: true do |f| %>
 
@@ -24,12 +52,11 @@
                             <%= f.label :comment,  value="Message", class:"form-label" %>
                             <%= f.text_area :comment, class:"form-control",
                             placeholder: 'Send message' %>
-                        <%= f.hidden_field :lesson, value: lesson.id %>
-                        <%= f.hidden_field :user, value: lesson.user.id %>
+                            <%= f.hidden_field :lesson, value: lesson.id %>
+                            <%= f.hidden_field :user, value: lesson.user.id %>
                         </div>
                         <%= f.submit 'Approve!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
                     <% end %>
-              
                <% end %>
         </div>
 

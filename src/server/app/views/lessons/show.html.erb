@@ -1,0 +1,71 @@
+<div class="container-fluid padding">
+
+  <div class="teacher-box">
+            <div class="teacher-image"> 
+                <h2>Teacher:<%= @teacher.user.full_name %></h2>
+               <% if @teacher.user.avatar.attached? %>
+                  <%= image_tag url_for(@teacher.user.avatar) %>
+               <% else %>
+                  <%= image_tag("default.png") %>
+              <% end %>
+            <h2>Student:<%= @user.full_name %></h2>
+               <% if @user.avatar.attached? %>
+                  <%= image_tag url_for(@user.avatar) %>
+               <% else %>
+                  <%= image_tag("default.png") %>
+              <% end %>
+            </div><!--teacher-image-->
+          <div class="teacher-content">
+            <div class="teacher-description">
+                  <h3><%= @teacher.price %> CAD</h3>
+                      <% unless @teacher.languages.empty? %>
+                        <div>
+                          <% @teacher.languages.each do |language| %>
+                          <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
+                        </div>
+                          <% end %>
+                      <% end %>  
+                      <small>
+                         <%= link_to(
+                         "Delete",
+                         lesson_path(@lesson),
+                         method: :delete, data: {
+                           confirm: "Are you sure?"
+                         }
+                         ) %>
+                      </small>
+                      <small>
+                         <%= link_to(
+                         "Edit",
+                        edit_lesson_path(@lesson)
+                         ) %>
+                      </small>
+            </div>
+            <div class="teacher-map">
+            <!-----------------------map------------------------------>
+                  <div style='width: 600px;'>
+                    <div id="map" style='width: 600px; height: 400px;'></div>
+                  </div>
+
+                  <script>
+                    const handler = Gmaps.build('Google');
+                    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+                      markers = handler.addMarkers([
+                        {
+                          "lat": <%= @teacher.latitude %>,
+                          "lng": <%= @teacher.longitude %>,
+                          "infowindow": "<%= @teacher.user.first_name %>'s location"
+                        }
+                      ]);
+                      handler.bounds.extendWith(markers);
+                      handler.fitMapToBounds();
+                      handler.getMap().setZoom(12)
+                    });
+
+                  </script>
+            <!-----------------------map------------------------------>
+              </div>
+              </div><!--teacher-content-->
+
+
+              </div><!--teacher-box-->

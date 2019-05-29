@@ -19,6 +19,12 @@ class LessonsController < ApplicationController
         end
     end
 
+    def show
+        @lesson = Lesson.find(params[:id])
+        @teacher = @lesson.teacher
+        @user = @lesson.user
+    end
+
     def edit
     end
   
@@ -48,6 +54,20 @@ class LessonsController < ApplicationController
     end
 
     def pay
+        @lesson = Lesson.find(params[:lesson])
+        @id = params[:teacher]
+        @teacher = Teacher.find(@id)
+        @lesson.user = User.find(params[:id])
+         if @lesson.update lesson_params
+            # @lesson.pay
+            # @lesson.update lesson_params
+            redirect_to new_lesson_payment_path(@lesson)
+        else
+            render :root_path
+        end
+    end
+
+    def finish
         @lesson = Lesson.find(params[:lesson])
         @id = params[:teacher]
         @teacher = Teacher.find(@id)

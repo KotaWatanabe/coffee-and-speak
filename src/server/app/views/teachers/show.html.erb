@@ -7,7 +7,7 @@
                <% if @teacher.user.avatar.attached? %>
                   <%= image_tag url_for(@teacher.user.avatar) %>
                <% else %>
-                  <%= image_tag("fake.jpeg") %>
+                  <%= image_tag("default.png") %>
               <% end %>
             </div><!--teacher-image-->
           <div class="teacher-content">
