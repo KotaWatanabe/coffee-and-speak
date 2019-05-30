@@ -15,7 +15,7 @@ export function WelcomePage(props) {
     <div className="welcomeTitle">
         <h1>Coffee and Speak</h1>
         <p>Find your best private teacher</p>
-        <Button className="signup-btn">Sign Up!</Button>
+        <Button href="sign_up" className="signup-btn">Sign Up!</Button>
     </div>
     </div>
     </>
