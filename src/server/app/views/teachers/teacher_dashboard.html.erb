@@ -65,6 +65,19 @@
                         </div>
                         <%= f.submit 'Approve!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
                     <% end %>
+
+                     <%= form_with url: decline_lesson_path, :method => :PUT, local: true do |f| %>
+
+                        <div class="form-group">
+                            <%= f.label :answer,  value="Message", class:"form-label" %>
+                            <%= f.text_area :answer, class:"form-control",
+                            placeholder: 'Send message' %>
+                            <%= f.hidden_field :lesson, value: lesson.id %>
+                            <%= f.hidden_field :user, value: lesson.user.id %>
+                            <%= f.hidden_field :comment, value: lesson.comment %>
+                        </div>
+                        <%= f.submit 'Decline', class: 'btn btn-primary col-12 col-md-3 full-width' %>
+                    <% end %>
                <% end %>
 
                <hr>

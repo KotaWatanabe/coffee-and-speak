@@ -90,6 +90,28 @@
                     </div>
                
                 <% end %>
+
+            <h2 class="text-center" >Your declined lessons</h2>
+            <% if @declined_lessons.length === 0 %>
+                <p class="text-center">You don't have any declined lesson</p>
+             <% end %>
+                <% @declined_lessons.each do |lesson| %>
+                    <div class="teacher-box">        
+                        <div class=teacher-image> 
+                                <% if lesson.teacher.user.avatar.attached? %>
+                                    <%= image_tag lesson.teacher.user.avatar %>
+                                <% else %>
+                                    <%= image_tag("default.png") %>
+                                <% end %>
+                        </div>
+                        <div class="teacher-content">
+                            <p>Teacher's Name<p>
+                            <h3><%= link_to lesson.teacher.user.full_name, lesson_path(lesson)%></h3><br />
+                            <p>Message: <%= lesson.answer %></p>
+                        </div>
+                    </div>
+               
+                <% end %>
         </div>
 
         <div class="favourite-box">

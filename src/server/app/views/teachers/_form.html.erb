@@ -36,7 +36,7 @@
             <p>Availabilities</p>
             <div class="form-group">
                 <%= fields_for @availability do |a| %>
-                <%= a.check_box :day, value:"Monday" %>
+                <%= a.check_box :monday, value:"Monday" %>
                 <%= a.label:Monday, "Monday" %> 
                 <span class="time ml-4">
                     <%= a.check_box :morning, value:true %>
@@ -46,8 +46,7 @@
                     <%= a.check_box :evening, value:true %>
                     <%= a.label:evening, "Evening" %> <br> <hr class="m-0">
                 </span>
-                <!--     
-                <%= a.check_box :day %>
+                <%= a.check_box :tuesday, value:"Tuesday" %>
                 <%= a.label:Tuesday, "Tuesday" %> 
                 <span class="time ml-4">
                     <%= a.check_box :morning, value:true %>
@@ -57,8 +56,8 @@
                     <%= a.check_box :evening, value:true %>
                     <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
                 </span>
-                <%= a.check_box :day %>
-                <%= a.label:Wenesday, "Wednesday" %>
+                <%= a.check_box :wednesday, value:"Wednesday" %>
+                <%= a.label:Wedesday, "Wednesday"%>
                 <span class="time ml-3">
                     <%= a.check_box :morning, value:true %>
                     <%= a.label:morning, "Morning" %> 
@@ -67,7 +66,7 @@
                     <%= a.check_box :evening, value:true %>
                     <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
                 </span>
-                <%= a.check_box :day %>
+                <%= a.check_box :thursday, value:"Thursday" %>
                 <%= a.label:Thursday, "Thursday" %>
                 <span class="time ml-3">
                     <%= a.check_box :morning, value:true %>
@@ -77,7 +76,7 @@
                     <%= a.check_box :evening, value:true %>
                     <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
                 </span>
-                <%= a.check_box :day %>
+                <%= a.check_box :friday, value:"Friday" %>
                 <%= a.label:Friday, "Friday" %>
                 <span class="time ml-3">
                     <%= a.check_box :morning, value:true %>
@@ -87,7 +86,7 @@
                     <%= a.check_box :evening, value:true %>
                     <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
                 </span>
-                <%= a.check_box :day %>
+                <%= a.check_box :saturday, value:"Saturday" %>
                 <%= a.label:Saturday, "Saturday" %>
                 <span class="time ml-3">
                     <%= a.check_box :morning, value:true %>
@@ -97,7 +96,7 @@
                     <%= a.check_box :evening, value:true %>
                     <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
                 </span>
-                <%= a.check_box :day %>
+                <%= a.check_box :sunday, value:"Sunday" %>
                 <%= a.label:Sunday, "Sunday" %>
                  <span class="time ml-3">
                     <%= a.check_box :morning, value:true %>
@@ -107,7 +106,7 @@
                     <%= a.check_box :evening, value:true %>
                     <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
                 </span>
-                -->
+    
                 <% end %>
             </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_174439) do
+ActiveRecord::Schema.define(version: 2019_05_30_205448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,15 +38,19 @@ ActiveRecord::Schema.define(version: 2019_05_30_174439) do
 
   create_table "availabilities", force: :cascade do |t|
     t.bigint "teacher_id"
-    t.string "date"
-    t.string "start"
-    t.string "end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "day"
     t.boolean "morning"
     t.boolean "afternoon"
     t.boolean "evening"
+    t.boolean "mondany"
+    t.boolean "tuesday"
+    t.boolean "wednesday"
+    t.boolean "thursday"
+    t.boolean "friday"
+    t.boolean "saturday"
+    t.boolean "sunday"
     t.index ["teacher_id"], name: "index_availabilities_on_teacher_id"
   end
 

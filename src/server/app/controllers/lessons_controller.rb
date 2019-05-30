@@ -58,6 +58,35 @@ class LessonsController < ApplicationController
             render :new
         end
     end
+    def decline
+        @lesson = Lesson.find(params[:lesson])
+        @id = params[:user]
+        @user = User.find(@id)
+        @lesson.user = @user
+         if @lesson.update lesson_params
+            @lesson.decline
+            @lesson.update lesson_params
+            flash[:success] = "Registration successful!"
+            redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
+        else
+            render :new
+        end
+    end
+
+    def approve
+        @lesson = Lesson.find(params[:lesson])
+        @id = params[:user]
+        @user = User.find(@id)
+        @lesson.user = @user
+         if @lesson.update lesson_params
+            @lesson.approve
+            @lesson.update lesson_params
+            flash[:success] = "Registration successful!"
+            redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
+        else
+            render :new
+        end
+    end
 
     def pay
         @lesson = Lesson.find(params[:lesson])
