@@ -5,7 +5,7 @@
         </div>
           <div class="col-12">
             <% @languages.each do |language| %>
-            <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
+            <%= link_to(language.name, teachers_path(language: language.name, sort:"test"), class: "badge badge-pill badge-primary") %>
             <% end %>
          </div>
    </div>
