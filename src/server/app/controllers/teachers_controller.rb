@@ -6,8 +6,11 @@ class TeachersController < ApplicationController
   
     def create
       @teacher = Teacher.new teacher_params
+      @availability = Availability.new availability_params
+      @availability.teacher = @teacher
       @teacher.user = current_user
-      if @teacher.save
+      byebug
+      if @teacher.save && @availability.save
         redirect_to teacher_path(@teacher.id)
       else
         render :new
@@ -64,7 +67,11 @@ class TeachersController < ApplicationController
     private
   
     def teacher_params
-      params.require(:teacher).permit(:description, :price, :area, :address, :language_names)
+      params.require(:teacher).permit(:description, :price, :address, :language_names, availabilities_attributes: [:day, :morning, :afternoon, :evening])
+    end
+  
+    def availability_params
+      params.permit(:day, :morning, :afternoon, :evening)
     end
   
     def find_teacher

@@ -13,6 +13,9 @@ class Teacher < ApplicationRecord
 
     has_many :payments, dependent: :destroy
 
+    has_many :availabilities, dependent: :destroy
+    accepts_nested_attributes_for :availabilities
+
 
   def language_names
     self.languages.map{ |l| l.name }.join(",")

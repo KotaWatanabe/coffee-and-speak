@@ -33,6 +33,84 @@
                 <%= f.text_field :address, class:"form-control", placeholder: 'Where do you teach?' %>
             </div>
 
+            <p>Availabilities</p>
+            <div class="form-group">
+                <%= fields_for @availability do |a| %>
+                <%= a.check_box :day, value:"Monday" %>
+                <%= a.label:Monday, "Monday" %> 
+                <span class="time ml-4">
+                    <%= a.check_box :morning, value:true %>
+                    <%= a.label:morning, "Morning" %> 
+                    <%= a.check_box :afternoon, value:true %>
+                    <%= a.label:afternoon, "Afternoon" %> 
+                    <%= a.check_box :evening, value:true %>
+                    <%= a.label:evening, "Evening" %> <br> <hr class="m-0">
+                </span>
+                <!--     
+                <%= a.check_box :day %>
+                <%= a.label:Tuesday, "Tuesday" %> 
+                <span class="time ml-4">
+                    <%= a.check_box :morning, value:true %>
+                    <%= a.label:morning, "Morning" %> 
+                    <%= a.check_box :afternoon, value:true %>
+                    <%= a.label:afternoon, "Afternoon" %> 
+                    <%= a.check_box :evening, value:true %>
+                    <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
+                </span>
+                <%= a.check_box :day %>
+                <%= a.label:Wenesday, "Wednesday" %>
+                <span class="time ml-3">
+                    <%= a.check_box :morning, value:true %>
+                    <%= a.label:morning, "Morning" %> 
+                    <%= a.check_box :afternoon, value:true %>
+                    <%= a.label:afternoon, "Afternoon" %> 
+                    <%= a.check_box :evening, value:true %>
+                    <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
+                </span>
+                <%= a.check_box :day %>
+                <%= a.label:Thursday, "Thursday" %>
+                <span class="time ml-3">
+                    <%= a.check_box :morning, value:true %>
+                    <%= a.label:morning, "Morning" %> 
+                    <%= a.check_box :afternoon, value:true %>
+                    <%= a.label:afternoon, "Afternoon" %> 
+                    <%= a.check_box :evening, value:true %>
+                    <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
+                </span>
+                <%= a.check_box :day %>
+                <%= a.label:Friday, "Friday" %>
+                <span class="time ml-3">
+                    <%= a.check_box :morning, value:true %>
+                    <%= a.label:morning, "Morning" %> 
+                    <%= a.check_box :afternoon, value:true %>
+                    <%= a.label:afternoon, "Afternoon" %> 
+                    <%= a.check_box :evening, value:true %>
+                    <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
+                </span>
+                <%= a.check_box :day %>
+                <%= a.label:Saturday, "Saturday" %>
+                <span class="time ml-3">
+                    <%= a.check_box :morning, value:true %>
+                    <%= a.label:morning, "Morning" %> 
+                    <%= a.check_box :afternoon, value:true %>
+                    <%= a.label:afternoon, "Afternoon" %> 
+                    <%= a.check_box :evening, value:true %>
+                    <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
+                </span>
+                <%= a.check_box :day %>
+                <%= a.label:Sunday, "Sunday" %>
+                 <span class="time ml-3">
+                    <%= a.check_box :morning, value:true %>
+                    <%= a.label:morning, "Morning" %> 
+                    <%= a.check_box :afternoon, value:true %>
+                    <%= a.label:afternoon, "Afternoon" %> 
+                    <%= a.check_box :evening, value:true %>
+                    <%= a.label:Eevening, "Evening" %> <br> <hr class="m-0">
+                </span>
+                -->
+                <% end %>
+            </div>
+
             <div class="form-group">
                     <%= f.label :language_names, value="Language" %>
                     <%= f.text_field :language_names %>
