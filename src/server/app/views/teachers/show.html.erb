@@ -5,7 +5,7 @@
           <div class="teacher-box">
             <div class="teacher-image"> 
                <% if @teacher.user.avatar.attached? %>
-                  <%= image_tag url_for(@teacher.user.avatar) %>
+                  <%= image_tag url_for(@teacher.user.avatar), :class => "show-image"%>
                <% else %>
                   <%= image_tag("default.png") %>
               <% end %>
@@ -13,9 +13,8 @@
           <div class="teacher-content">
             <div class="teacher-description">
               <h2><%= @teacher.user.full_name %></h2>
-                  <h3><%= @teacher.price %> CAD</h3>
+                  <h3>$<%= @teacher.price %> CAD</h3>
                   <h4><%= @teacher.description %></h4>
-
                   <% unless @teacher.reviews.empty? %>
                   <p>Review: <%=@avg_rating%></p>
                   <% else %>
@@ -32,6 +31,13 @@
                         <div>
                           <% @teacher.languages.each do |language| %>
                           <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
+                        </div>
+                          <% end %>
+                      <% end %>  
+                      <% unless @teacher.timeslots.empty? %>
+                        <div>
+                          <% @teacher.timeslots.each do |timeslot| %>
+                          <p><%= timeslot.day %><%= timeslot.time %></p>
                         </div>
                           <% end %>
                       <% end %>  
@@ -87,8 +93,8 @@
     <ul class="review-list">
       <% @reviews.each do |review| %>
         <li>
-          <p>Rating: <%= review.rating %></p><br />
-           <p><%= review.body %> </p> <br />
+          <p class="mb-0">Rating: <%= review.rating %></p><br />
+           <p class="mb-0"><%= review.body %> </p> <br />
           <small>
             <%= link_to(
             "Delete",
@@ -129,44 +135,7 @@
         <% end %>
     </div><!--"teacher-booking-box"-->
 
-
-
     </div><!--"teacher-wrapper"-->
-
-    
-
-
-
-
-
-
 
 </div><!--container-->
 
-
-
-
-                                    <% if false %>
-
-
-                                <h3>Review</>
-                                <%= form_with(model: [@teacher, @review], local: true) do |f| %>
-                                    <% if @review.errors.present? %>
-                                      <p class="form-errors">
-                                        <%= @review.errors.full_messages.join(", ") %>
-                                      </p>
-                                    <% end %>
-
-                                    <div class="form-group">
-                                      <%= f.text_area(
-                                      :body, cols: 50, rows: 5,
-                                      placeholder: "What are your thoughts...",
-                                      class: "form-control"
-                                      ) %><br>
-                                      <%= f.label :rating %>
-                                      <%= f.number_field :rating, in: 1..5 %>
-                                    </div>
-                                    <%= f.submit :submit %>
-                                  <% end %>
-
-                                <% end %>

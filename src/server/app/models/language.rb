@@ -4,11 +4,11 @@ class Language < ApplicationRecord
 
     validates :name, presence: true, uniqueness: { case_sensitive: false }
   
-    before_validation :downcase_name
+    before_validation :uppercase_name
   
     private
   
-    def downcase_name
-      self.name&.downcase!
+    def uppercase_name
+      self.name&.capitalize!
     end
 end

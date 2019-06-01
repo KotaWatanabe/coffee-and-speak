@@ -7,7 +7,7 @@
     <div class="dashboard-wrapper">
 
         <div class="lesson-box">
-            <h2 class="text-center" >Your Upcoming lesson</h2>
+            <h4 class="text-center" >Your Upcoming lesson</h4>
                 <% if @approved_lessons.length > 0 && @payed_lessons.length === 0 %>
                     <p class="text-center">Waiting for payment from student</p>
                 <% end %>
@@ -25,14 +25,15 @@
                         </div>
                         <div class="teacher-content">
                             <p>User's Name<p>
-                           <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3>
+                            <h4><%= lesson.user.full_name %></h4>
+                            <p><%= link_to "Lesson detail", lesson_path(lesson)%></p><br />
                         </div>
                     </div>               
                 <% end %>
         </div>
 
         <div class="requested-box">
-            <h2 class="text-center">Requested lesson</h2>
+            <h4 class="text-center">Requested lesson</h4>
                 <% if @requested_lessons.length === 0 %>
                     <p class="text-center">You don't have any requested lesson</p>
                 <% end %>
@@ -47,7 +48,8 @@
                         </div>
                         <div class="teacher-content">
                             <p>User's Name<p>
-                            <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3>
+                            <h4><%= lesson.user.full_name %></h4>
+                            <p><%= link_to "Lesson detail", lesson_path(lesson)%></p><br />
                             <p>Comment: <%=lesson.comment%></p>
                         </div>
                     </div>               
@@ -81,7 +83,7 @@
                <% end %>
 
                <hr>
-            <h2 class="text-center" >Waiting for pay confirmation</h2>
+            <h4 class="text-center" >Waiting for pay confirmation</h2>
             <% if @approved_lessons.length === 0 %>
                 <p class="text-center">You don't have any payment status lesson</p>
              <% end %>
@@ -96,7 +98,8 @@
                         </div>
                         <div class="teacher-content">
                             <p>Student's Name<p>
-                            <h3><%= link_to lesson.user.full_name, lesson_path(lesson)%></h3><br />
+                            <h4><%= lesson.user.full_name %></h4>
+                            <p><%= link_to "Lesson detail", lesson_path(lesson)%></p><br />
                             <p>Message from student: <%= lesson.answer %></p>
                             <p>Answer from Teacher: <%= lesson.answer %></p>
                         </div>

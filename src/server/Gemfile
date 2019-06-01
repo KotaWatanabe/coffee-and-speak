@@ -48,6 +48,9 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'aasm'
 gem "mini_magick"
+gem "sprockets-rails"
+gem 'bootstrap-sass'
+gem 'ratyrate'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

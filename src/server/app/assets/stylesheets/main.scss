@@ -14,6 +14,13 @@ html {
         // font-family: 'Playfair Display', serif;
         // font-family: 'Just Another Hand', cursive;
   }
+
+  h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: 2rem;}
+
+
+  h1 {padding-top: 1em;}
 //   h1{
 //     font-family: 'Holtwood One SC', serif;
 //   }
@@ -39,7 +46,10 @@ html {
     padding: 0 1em;
     margin: 0 auto;
 }
-  
+li{
+  list-style: none;
+  margin-left: 0;
+}
   
   .top-wrapper{
     background-image:url("welcome2");
@@ -118,19 +128,22 @@ html {
 
   // user dashboard
 
-  .dashboard-wrapper{
-    display:flex;
+  .dashboard-wrapper,
+
+  .lesson-box,
+  .favourite-box,
+  .requested-box, .declined-lessons, .requested-lessons, .upcoming-classes, .approved-lessons, .completed-lessons, .favourite-teachers {
+    display: block; width: 100%; min-height: 20vh; padding: 1em;
   }
 
-  .lesson-box{
-    flex:1;
-  }
-  .favourite-box{
-    flex:1;
-  }
-  .requested-box{
-    flex:1;
-  }
+  .declined-lessons {background: white;}
+  .requested-lessons {background: olivedrab;}
+
+.dashboard-wrapper {background: orange; padding: 0; margin-bottom: 1em;}
+.upcoming-classes, .favourite-teachers {background: pink;}
+
+.approved-lessons, .completed-lessons { background: green;}
+
   .favourited-card{
     padding:0 2em;
   }
@@ -143,16 +156,17 @@ html {
     padding: 1em 2em;
   }
   .teacher-box{
-    display:flex;
+    display:block;
     width: 100%;
   }
   .teacher-image{
-    width:40%;
-    height: 50%;
+    width:100%;
+    background: pink;
   }
   .teacher-content{
-    width:60%;
-    margin-left: 1em;
+    width:100%;
+    margin-left: 0;
+    background: lightblue;
   }
   .teacher-card{
     margin-bottom: 2em;
@@ -176,4 +190,120 @@ html {
 
   // teacher dashboard
 
+// teacher index
 
+.index-image{
+  // width: 150px;
+  // height: 150px;
+  border-radius:50px
+}
+.show-image{
+  // width: 350px;
+  // height: 350px;
+  border-radius:80px
+}
+
+.badge{
+  font-size:1.2em;
+}
+
+// star
+.checked {
+  color: orange;
+}
+
+// stripe
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*DESKTOP LAST */
+@media screen and (min-width: 1024px) {
+body {
+
+  .dashboard-wrapper,
+
+  .lesson-box,
+  .favourite-box,
+  .requested-box, .declined-lessons, .requested-lessons, .upcoming-classes, .approved-lessons, .completed-lessons, .favourite-teachers {
+    display: block; width: 100%; min-height: 20vh; padding: 2em;
+  }
+background: red;
+}
+  // user dashboard
+
+  .dashboard-wrapper{
+    display:flex;
+  }
+
+  .lesson-box{
+    flex:1;
+  }
+  .favourite-box{
+    flex:1;
+  }
+  .requested-box{
+    flex:1;
+  }
+  .favourited-card{
+    padding:0 2em;
+  }
+
+
+  .teacher-box{
+    display:flex;
+    width: 100%;
+  }
+  .teacher-image{
+    width:50%;
+    background: white;
+  }
+  .teacher-content{
+    width:50%;
+    margin-left: 1em;
+    background: white;
+  }
+}

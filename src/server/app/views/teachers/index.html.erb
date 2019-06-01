@@ -5,20 +5,23 @@
         </div>
           <div class="col-12">
             <% @languages.each do |language| %>
-            <%= link_to(language.name, teachers_path(language: language.name, sort:"test"), class: "badge badge-pill badge-primary") %>
+            <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
             <% end %>
          </div>
    </div>
 
   
    <% if @language.present? %>
-     <div class="row welcome text-center">
+     <div class="row welcome text-center my-2">
 		<div class="col-12">
             <h3>Showing teachers tagged by
-        <span class= "badge badge-pill badge-primary">
-        <%= @language.name %>
-        </span></h3>
+            <span class= "badge badge-pill badge-primary">
+                <%= @language.name %>
+            </span></h3>
         </div>
+    <div class="col-12">
+            <p>Sort by  <%= link_to("Price", teachers_path(language: @language.name, price:"asc"), class: "badge badge-pill badge-warning") %> or <%= link_to("Rating", teachers_path(language: @language.name, rating:"desc"), class: "badge badge-pill badge-warning") %> </p>
+    </div>
    </div>
     <% end %>
     
@@ -31,9 +34,9 @@
                         <div class="teacher-box">
                         <div class=teacher-image> 
                             <% if teacher.user.avatar.attached? %>
-                                <%= image_tag teacher.user.avatar %>
+                                <%= image_tag url_for(teacher.user.avatar), :class => "index-image" %>
                             <% else %>
-                                <%= image_tag("default.png") %>
+                                <%= image_tag url_for("default.png"), :class => "index-image"%>
                             <% end %>
                         </div>
                             <div class="teacher-content">
@@ -41,7 +44,7 @@
                                     <%= link_to(teacher.user.full_name, teacher_path(teacher)) %> <br />
                                 </h4>
                                 <p class="card-text"><%= teacher.description.first(80) %>... </p>
-                                <p class="card-text"><%= teacher.price %> CAD</p>
+                                <p class="card-text">$<%= teacher.price %> CAD</p>
                                 <% unless teacher.languages.empty? %>
                                 <div>
                                     <% teacher.languages.each do |language| %>
@@ -52,11 +55,13 @@
                                 <% unless teacher.reviews.empty? %>
                                     <div>
                                         <p><%=teacher.reviews.length%> reviews</p>
-                                        Review:<p><%= teacher.reviews.average(:rating).floor(2).to_f%></p> 
-                                        <% teacher.reviews.average(:rating).to_i.times do  %>
-                                         <span class="glyphicon glyphicon-star"></span>
-                              
-                                <% end %>
+                                        Review:<p>
+                                       <% teacher.calculate_rating.to_i.times do  %>
+                                           <span class="fa fa-star checked"></span>
+                                       <% end %>
+                                       <% (5 - (teacher.calculate_rating.to_i)).times do  %>
+                                        <span class="fa fa-star"></span></p> 
+                                        <%end%>
                                     </div>
                                       <% else %>
                                         <p>0 reviews</p>

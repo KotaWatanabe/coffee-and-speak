@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_205448) do
+ActiveRecord::Schema.define(version: 2019_05_30_231842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_205448) do
     t.boolean "morning"
     t.boolean "afternoon"
     t.boolean "evening"
-    t.boolean "mondany"
+    t.boolean "monday"
     t.boolean "tuesday"
     t.boolean "wednesday"
     t.boolean "thursday"
@@ -116,6 +116,15 @@ ActiveRecord::Schema.define(version: 2019_05_30_205448) do
     t.index ["teacher_id"], name: "index_teacher_languages_on_teacher_id"
   end
 
+  create_table "teacher_timeslots", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "timeslot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_teacher_timeslots_on_teacher_id"
+    t.index ["timeslot_id"], name: "index_teacher_timeslots_on_timeslot_id"
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.integer "price"
     t.string "area"
@@ -128,6 +137,13 @@ ActiveRecord::Schema.define(version: 2019_05_30_205448) do
     t.float "longitude"
     t.json "schedule"
     t.index ["user_id"], name: "index_teachers_on_user_id"
+  end
+
+  create_table "timeslots", force: :cascade do |t|
+    t.string "day"
+    t.string "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -153,5 +169,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_205448) do
   add_foreign_key "reviews", "users"
   add_foreign_key "teacher_languages", "languages"
   add_foreign_key "teacher_languages", "teachers"
+  add_foreign_key "teacher_timeslots", "teachers"
+  add_foreign_key "teacher_timeslots", "timeslots"
   add_foreign_key "teachers", "users"
 end

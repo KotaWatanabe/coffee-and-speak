@@ -6,11 +6,20 @@ class TeachersController < ApplicationController
   
     def create
       @teacher = Teacher.new teacher_params
-      @availability = Availability.new availability_params
-      @availability.teacher = @teacher
+      # @availability = Availability.new availability_params
+      # @availability.teacher = @teacher
+
+      
       @teacher.user = current_user
-      byebug
-      if @teacher.save && @availability.save
+      if @teacher.save
+        params[:teacher][:teacher_timeslots].each do |ts|
+          if ts
+            slot = TeacherTimeslot.new
+            slot.teacher_id = @teacher.id
+            slot.timeslot_id = ts
+            slot.save
+          end
+        end
         redirect_to teacher_path(@teacher.id)
       else
         render :new
@@ -30,12 +39,48 @@ class TeachersController < ApplicationController
   
     def index
       @languages = Language.all
-        if params[:language]
+      @teachers = Teacher.all
+
+      @teachers.each do|teacher|
+        unless teacher.reviews.empty?
+          @avg_rating = teacher.reviews.average(:rating).floor(2).to_f
+        end
+      end
+      
+        if params[:price]
+          @language = Language.find_or_initialize_by(name: params[:language])
+          @teachers= @language.teachers.order(price: :ASC)
+        elsif params[:rating]
+          ratings = []
+          @teachers = []
+          @language = Language.find_or_initialize_by(name: params[:language])
+          teachers = @language.teachers
+          teachers.each do |t|
+            if t.reviews.length == 0
+              ratings << {id: t.id, rating: 0}
+            else
+              total = 0
+              count = 0
+              t.reviews.each do |r|
+                total += r.rating
+                count +=1
+              end
+              ratings << {id: t.id, rating: total/count}
+            end
+          end
+          ratings = ratings.sort_by{|r| -r[:rating]}
+          ratings.each do |rating|
+            @teachers << @language.teachers.find(rating[:id])
+          end
+          
+        elsif params[:language]
           @language = Language.find_or_initialize_by(name: params[:language])
           @teachers= @language.teachers.order(created_at: :DESC)
         else
           @teachers = Teacher.order(created_at: :DESC)
         end
+
+      
     end
   
     def edit
@@ -67,14 +112,21 @@ class TeachersController < ApplicationController
     private
   
     def teacher_params
-      params.require(:teacher).permit(:description, :price, :address, :language_names, availabilities_attributes: [:day, :morning, :afternoon, :evening])
+      # params.require(:teacher).permit!
+      params.require(:teacher).permit(:description, :price, :address, :language_names, :teacher_timeslots)
+
     end
-  
-    def availability_params
-      params.permit(:day, :morning, :afternoon, :evening)
-    end
+
   
     def find_teacher
       @teacher = Teacher.find(params[:id])
     end
+
+    def average_rating
+      @teachers.each do|teacher|
+        @avg_rating = teacher.reviews.average(:rating).floor(2).to_f
+      end
+    end
 end
+
+
