@@ -5,11 +5,7 @@ class TeachersController < ApplicationController
     end
   
     def create
-      @teacher = Teacher.new teacher_params
-      # @availability = Availability.new availability_params
-      # @availability.teacher = @teacher
-
-      
+      @teacher = Teacher.new teacher_params      
       @teacher.user = current_user
       if @teacher.save
         params[:teacher][:teacher_timeslots].each do |ts|

@@ -55,12 +55,12 @@
                                 <% unless teacher.reviews.empty? %>
                                     <div>
                                         <p><%=teacher.reviews.length%> reviews</p>
-                                        Review:<p>
+                                        Review:
                                        <% teacher.calculate_rating.to_i.times do  %>
                                            <span class="fa fa-star checked"></span>
                                        <% end %>
                                        <% (5 - (teacher.calculate_rating.to_i)).times do  %>
-                                        <span class="fa fa-star"></span></p> 
+                                        <span class="fa fa-star"></span>
                                         <%end%>
                                     </div>
                                       <% else %>

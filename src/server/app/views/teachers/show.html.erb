@@ -13,13 +13,28 @@
           <div class="teacher-content">
             <div class="teacher-description">
               <h2><%= @teacher.user.full_name %></h2>
+                <div class="language-tag">
+                  <% unless @teacher.languages.empty? %>
+                      <% @teacher.languages.each do |language| %>
+                      <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
+                      <% end %>
+                  <% end %>  
+                </div>
                   <h3>$<%= @teacher.price %> CAD</h3>
                   <h4><%= @teacher.description %></h4>
-                  <% unless @teacher.reviews.empty? %>
-                  <p>Review: <%=@avg_rating%></p>
-                  <% else %>
-                  <p>0 reviews</p>
-                  <% end %>
+                  <div>
+                    <% unless @teacher.reviews.empty? %>
+                      <p>Review:
+                        <% @avg_rating.floor.times do  %>
+                            <span class="fa fa-star checked"></span>
+                        <% end %>
+                              <% (5 - (@avg_rating.floor)).times do %>
+                            <span class="fa fa-star"></span>
+                        <%end%>
+                      <% else %>
+                      <p>0 reviews</p>
+                    <% end %>
+                    <span class="like-button">
                     <% if user_signed_in? && %>
                       <% if @favourite.present? %>
                         <%= link_to fa_icon('thumbs-up 2x'), favourite_path(@favourite) , method: :delete, style: 'color: blue;' %>
@@ -27,17 +42,12 @@
                         <%= link_to fa_icon('thumbs-up 2x'), teacher_favourites_path(@teacher), method: :post, style: 'color: lightgrey;' %>
                       <% end %>
                     <% end %>
-                      <% unless @teacher.languages.empty? %>
-                        <div>
-                          <% @teacher.languages.each do |language| %>
-                          <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
-                        </div>
-                          <% end %>
-                      <% end %>  
+                    </span>
+                  </div>
                       <% unless @teacher.timeslots.empty? %>
                         <div>
                           <% @teacher.timeslots.each do |timeslot| %>
-                          <p><%= timeslot.day %><%= timeslot.time %></p>
+                          <p><%= timeslot.day %><span class="timeslot-time"><%= timeslot.time %></span></p>
                         </div>
                           <% end %>
                       <% end %>  

@@ -195,13 +195,15 @@ li{
 .index-image{
   // width: 150px;
   // height: 150px;
-  border-radius:50px
+  border-radius:50px;
 }
-.show-image{
+.show-image,.dashboard-image{
   // width: 350px;
   // height: 350px;
-  border-radius:80px
+  border-radius:80px;
 }
+
+
 
 .badge{
   font-size:1.2em;
@@ -240,25 +242,6 @@ li{
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*DESKTOP LAST */
 @media screen and (min-width: 1024px) {
@@ -300,10 +283,32 @@ background: red;
   .teacher-image{
     width:50%;
     background: white;
+    text-align:center;
   }
   .teacher-content{
     width:50%;
     margin-left: 1em;
     background: white;
+  }
+
+  .index-image{
+    // width: 150px;
+    // height: 150px;
+    border-radius:50px
+  }
+  .show-image{
+    // width: 350px;
+    // height: 350px;
+    border-radius:80px;
+    width:400px;
+  }
+  .like-button{
+    margin-left: 1em;
+  }
+  .language-tag{
+    margin-bottom: 2em;
+  }
+  .timeslot-time{
+    margin-left: 0.5em;
   }
 }
