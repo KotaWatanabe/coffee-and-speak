@@ -6,7 +6,7 @@
    </div>
     <div class="dashboard-wrapper">
 
-        <div class="lesson-box"><div class="upcoming-classes">
+        <div class="lesson-box"><div class="upcoming-classes teacher-card">
             <h3 class="text-center" >Your Upcoming class</h3>
              <% if @approved_lessons.length > 0 && @confirmed_lessons.length === 0 %>
                 <p class="text-center">Please pay to confirm your lesson</p>
@@ -32,14 +32,15 @@
                             <% end %>
                   <% end %>  
                             <h4><%= link_to("Lesson detail", teacher_path(lesson.teacher)) %></h4>
+                            <p>Your message: <%= lesson.comment %></p>
                             <p>Answer from Teacher: <%= lesson.answer %></p>
                         </div>
                     </div>               
                 <% end %>
-                </div>
+        </div>
          
 
-<div class="approved-lessons">
+<div class="approved-lessons teacher-card">
             <h3 class="text-center" >Your Approved lessons</h3>
             <% if @requested_lessons.length > 0 && @approved_lessons.length === 0  %>
                 <p class="text-center">Waiting for teacher approval</p>
@@ -65,13 +66,10 @@
                             <% end %>
                   <% end %>  
                             <h4><%= link_to("Lesson detail", teacher_path(lesson.teacher)) %></h4>
+                            <p>Your message: <%= lesson.comment %></p>
                             <p>Answer from Teacher: <%= lesson.answer %></p>
-                        </div>
-                    </div>         
-                    
-
-                     <%= form_with url: pay_lesson_path, :method => :PUT, local: true do |f| %>
-
+                        
+                        <%= form_with url: pay_lesson_path, :method => :PUT, local: true do |f| %>
                         <div class="form-group">
                         <%= f.hidden_field :lesson, value: lesson.id %>
                         <%= f.hidden_field :teacher, value: lesson.teacher.id %>
@@ -79,10 +77,11 @@
                         </div>
                         <%= f.submit 'Pay now!', class: 'btn btn-warning col-12 col-md-3 full-width' %>
                     <% end %>
-               
+                    </div>
+                    </div>         
                 <% end %>
                 </div>
-                <div class="requested-lessons">
+        <div class="requested-lessons teacher-card">
             <h3 class="text-center" >Your requested lessons</h3>
             <% if @requested_lessons.length === 0 %>
                 <p class="text-center">You don't have any requested lesson</p>
@@ -109,8 +108,8 @@
                     </div>
                 </div> 
                 <% end %>
-</div>
-<div class="declined-lessons">
+        </div>
+        <div class="declined-lessons teacher-card">
             <h3 class="text-center" >Your declined lessons</h3>
             <% if @declined_lessons.length === 0 %>
                 <p class="text-center">You don't have any declined lesson</p>
@@ -140,7 +139,7 @@
                 <% end %>
         </div>
 
-       <div class="favourite-teachers">
+       <div class="favourite-teachers teacher-card">
             <h3 class="text-center" >Your favourited teachers</h3>
                 <% if @favourited_teachers.length === 0 %>
                     <p class="text-center">You don't have favourited teacher</p>
@@ -185,7 +184,7 @@
                 <% end %>
             </div>
             <!-----------------review------------------->
-            <div class="completed-lessons">
+            <div class="completed-lessons teacher-card">
             <h3 class="text-center" >Review for finished lesson!</h3>
             <% if @finished_lessons.length === 0 %>
                 <p class="text-center">You don't have a completed lesson.</p>
