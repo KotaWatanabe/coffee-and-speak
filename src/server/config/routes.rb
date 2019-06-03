@@ -43,7 +43,11 @@ Rails.application.routes.draw do
       put :finish
       put :done
     end
-    resources :payments, only: [:new, :create]
+    resources :payments, only: [:new, :create] do
+      member do
+        get :thanks
+      end
+    end
   end
   
 end

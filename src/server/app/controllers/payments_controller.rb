@@ -25,11 +25,15 @@ class PaymentsController < ApplicationController
              @lesson.pay
              @lesson.update lesson_params
           @payment.update(transaction_id: charge.id)
-          redirect_to dashboard_user_path(current_user), notice: 'Thanks for completing the payment.'
+          redirect_to thanks_lesson_payment_path(@lesson,@payment), notice: 'Thanks for completing the payment.'
           else
           flash.now[:alert] = 'Problem handling the payment, please try again'
           render :new
         end
+      end
+
+      def thanks
+        @lesson = Lesson.find(params[:id])
       end
 
       private
