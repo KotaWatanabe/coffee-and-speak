@@ -103,7 +103,14 @@
     <ul class="review-list">
       <% @reviews.each do |review| %>
         <li>
-          <p class="mb-0">Rating: <%= review.rating %></p><br />
+          <p class="mb-0">Rating:                         
+          <% review.rating.floor.times do  %>
+             <span class="fa fa-star checked"></span>
+          <% end %>
+          <% (5 - (review.rating.floor)).times do %>
+              <span class="fa fa-star"></span>
+          <%end%>
+          <%= review.rating %></p><br />
            <p class="mb-0"><%= review.body %> </p> <br />
           <small>
             <%= link_to(
@@ -115,7 +122,7 @@
             ) %>
           </small>
           <small>
-            Reviewd<%= time_ago_in_words(review.created_at) %> ago by <%= review.user.full_name %>
+            Reviewd <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.full_name %>
           </small>
         </li>
       <% end %>
@@ -135,13 +142,13 @@
         <%= form_with url: lessons_path, local: true do |f| %>
             <div class="form-group">
                 <%= f.label :comment, value:"Comment" %>
-                <%= f.text_area :comment, class: 'form-control', placeholder: 'Anything what you want to tell to the teachers' %>
+                <%= f.text_area :comment, class: 'form-control', placeholder: 'Anything you want to ask to the teacher' %>
             </div>
               <h4>Price: <%=@teacher.price%>CAD</h4>              
               <p>Once Teacher approved, pay with your credit card</p>
               <%= f.hidden_field :user, value: current_user.id %>
               <%= f.hidden_field :teacher, value: params[:id] %>
-            <%= f.submit 'Send Request!', class: 'btn btn-warning col-lg-4 ' %>
+            <%= f.submit 'Send Request!', class: 'btn btn-warning col-lg-4' %>
         <% end %>
     </div><!--"teacher-booking-box"-->
 

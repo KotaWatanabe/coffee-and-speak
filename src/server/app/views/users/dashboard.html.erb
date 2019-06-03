@@ -31,7 +31,7 @@
                                 <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
                             <% end %>
                   <% end %>  
-                            <h4><%= link_to("Lesson detail", teacher_path(lesson.teacher)) %></h4>
+                            <h4><%= link_to("Lesson detail", lesson_path(lesson)) %></h4>
                             <p>Your message: <%= lesson.comment %></p>
                             <p>Answer from Teacher: <%= lesson.answer %></p>
                         </div>
@@ -65,7 +65,7 @@
                                 <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
                             <% end %>
                   <% end %>  
-                            <h4><%= link_to("Lesson detail", teacher_path(lesson.teacher)) %></h4>
+                            <h4><%= link_to("Lesson detail", lesson_path(lesson)) %></h4>
                             <p>Your message: <%= lesson.comment %></p>
                             <p>Answer from Teacher: <%= lesson.answer %></p>
                         
@@ -103,7 +103,7 @@
                             <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
                             <% end %>
                         <% end %>  
-                        <h4><%= link_to("Lesson detail", teacher_path(lesson.teacher)) %></h4>
+                        <h4><%= link_to("Lesson detail", lesson_path(lesson)) %></h4>
                         <p>Your message: <%= lesson.comment %></p>
                     </div>
                 </div> 
@@ -131,7 +131,7 @@
                                 <%= link_to(language.name, teachers_path(language: language.name), class: "badge badge-pill badge-primary") %>
                                 <% end %>
                              <% end %>  
-                            <h4><%= link_to("Lesson detail", teacher_path(lesson.teacher)) %></h4>
+                            <h4><%= link_to("Lesson detail", lesson_path(lesson)) %></h4>
                             <p>Answer from Teacher: <%= lesson.answer %></p>
                         </div>
                     </div>         
@@ -155,7 +155,7 @@
                           </div>
                             <div class="teacher-content">
                                 <p>Teacher name</p>
-                                <h4><%= link_to(teacher.user.first_name, teacher_path(teacher)) %> </h4>
+                                <h4><%= link_to(teacher.user.full_name, teacher_path(teacher)) %> </h4>
                                 <h4>$<%= teacher.price %> CAD</h4>
                                 <% unless teacher.languages.empty? %>
                                     <% teacher.languages.each do |language| %>

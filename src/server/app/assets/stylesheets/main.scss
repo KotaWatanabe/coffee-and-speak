@@ -219,8 +219,9 @@ li{
   width: 100%;
 }
 .teacher-image{
-  width:50%;
+  // width:100%;
   text-align:center;
+  display:flex;
 }
 .teacher-content{
   width:50%;
@@ -230,6 +231,14 @@ li{
   background:hsla(146, 50%, 36%, 0.3);
   padding: 1em;
 }
+// .image-of-teacher{
+//   flex:1;
+// }
+// .image-of-student{
+//   flex:1;
+// }
+
+
 
 .badge{
   font-size:1.2em;

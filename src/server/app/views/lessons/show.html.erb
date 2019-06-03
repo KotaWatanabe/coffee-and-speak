@@ -1,27 +1,31 @@
 <div class="container-fluid padding">
 
-  <div class="teacher-box">
-            <div class="teacher-image"> 
+  <div class="teacher-show-box">
+            <div class="teacher-show-image"> 
+              <div class="image-of-teacher">
                 <h2>Teacher:<%= @teacher.user.full_name %></h2>
                <% if @teacher.user.avatar.attached? %>
-                  <%= image_tag url_for(@teacher.user.avatar) %>
+                  <%= image_tag url_for(@teacher.user.avatar), :class => "show-image" %>
                <% else %>
-                  <%= image_tag("default.png") %>
+                  <%= image_tag("default.png")%>
               <% end %>
+              </div>
+              <div class="image-of-student">
             <h2>Student:<%= @user.full_name %></h2>
                <% if @user.avatar.attached? %>
-                  <%= image_tag url_for(@user.avatar) %>
+                  <%= image_tag url_for(@user.avatar), :class => "show-image" %>
                <% else %>
-                  <%= image_tag("default.png") %>
+                  <%= image_tag("default.png")%>
               <% end %>
+            </div>
             </div><!--teacher-image-->
 
             <div class="lesson-state">
              <%= @lesson.aasm_state %>
             </div>
-          <div class="teacher-content">
+          <div class="teacher-show-content">
             <div class="teacher-description">
-                  <h3><%= @teacher.price %> CAD</h3>
+                  <h3>$<%= @teacher.price %> CAD</h3>
                       <% unless @teacher.languages.empty? %>
                         <div>
                           <% @teacher.languages.each do |language| %>
