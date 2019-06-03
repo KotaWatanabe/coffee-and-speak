@@ -2,15 +2,15 @@
   <div class="teacher-wrapper">
     <div class="teacher-profile-box">
 
-          <div class="teacher-box">
-            <div class="teacher-image"> 
+          <div class="teacher-show-box">
+            <div class="teacher-show-image"> 
                <% if @teacher.user.avatar.attached? %>
                   <%= image_tag url_for(@teacher.user.avatar), :class => "show-image"%>
                <% else %>
                   <%= image_tag("default.png") %>
               <% end %>
             </div><!--teacher-image-->
-          <div class="teacher-content">
+          <div class="teacher-show-content">
             <div class="teacher-description">
               <h2><%= @teacher.user.full_name %></h2>
                 <div class="language-tag">
@@ -141,7 +141,7 @@
               <p>Once Teacher approved, pay with your credit card</p>
               <%= f.hidden_field :user, value: current_user.id %>
               <%= f.hidden_field :teacher, value: params[:id] %>
-            <%= f.submit 'Send Request!', class: 'btn btn-warning col-12 ' %>
+            <%= f.submit 'Send Request!', class: 'btn btn-warning col-lg-4 ' %>
         <% end %>
     </div><!--"teacher-booking-box"-->
 
