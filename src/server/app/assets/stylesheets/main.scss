@@ -255,6 +255,9 @@ footer{
   background:#2E8B57;
   text-align: center;
   padding: 0.5em;
+  position: fixed;
+  bottom: 0;
+  width:100%;
 }
 // stripe
 .StripeElement {
@@ -290,6 +293,13 @@ footer{
 }
 .pay-button{
   margin:1em 0 0.5em 0;
+}
+
+.thanks-message{
+  margin:0.5em 0 2em 0;
+}
+.blue{
+  text-decoration: underline;
 }
 
 /*DESKTOP LAST */
