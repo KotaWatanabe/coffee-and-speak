@@ -98,6 +98,7 @@
 
 
                   <% if @lesson.aasm_state === "finished" %>    
+                  <div class="review-box">
                     <h3>Write lesson review</h3>
                      <%= form_with url: teacher_reviews_path(@lesson.teacher), local: true do |f| %>
                          <div class="form-group">
@@ -114,5 +115,6 @@
                          <%= f.submit 'Submit', class: 'btn btn-warning col-4 text-center'  %>
                        <% end %>
                   <% end %>
+                  </div>
 
 </div>

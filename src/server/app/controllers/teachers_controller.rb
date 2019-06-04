@@ -3,7 +3,11 @@ class TeachersController < ApplicationController
 
 
     def new
+      if !current_user.teacher
       @teacher = Teacher.new
+      else
+        redirect_to root_path
+      end
     end
   
     def create
