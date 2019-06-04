@@ -1,5 +1,7 @@
 class TeachersController < ApplicationController
     before_action :find_teacher, only: [:show, :edit, :update, :destroy]
+
+
     def new
       @teacher = Teacher.new
     end
@@ -99,10 +101,12 @@ class TeachersController < ApplicationController
     end
 
     def teacher_dashboard
+      if user_signed_in?
         @teacher = current_user.teacher
         @requested_lessons = @teacher.lessons.where(aasm_state: "requested")
         @approved_lessons = @teacher.lessons.where(aasm_state: "approved")
         @payed_lessons = @teacher.lessons.where(aasm_state: "payed")
+      end
     end
 
     private

@@ -18,7 +18,7 @@ super_user = User.create(
   password: PASSWORD
 )
 
-10.times do
+50.times do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   User.create(
@@ -32,7 +32,7 @@ end
 users = User.all
 
 
-10.times do
+30.times do
   created_at = Faker::Date.backward(365 * 1)
   t = Teacher.create(
     # Faker is ruby module. We are just accessing
@@ -43,14 +43,14 @@ users = User.all
     updated_at: created_at,
     user: users.sample
   )
-      # if t.valid?
-      #   # t.reviews = rand(0..3).times.map do
-      #   #   Review.new(body: Faker::GreekPhilosophers.quote, user: users.sample)
-      #   # # end
-      #   # t.languages = rand(1..3).times.map do
-      #   #   Languages.new(name: languages.sample)
-      #   # end
-      # end
+      if t.valid?
+        t.reviews = rand(1..3).times.map do
+          Review.new(body: Faker::GreekPhilosophers.quote, rating: rand(2..3), user: users.sample)
+        end
+        # t.languages = rand(1..3).times.map do
+        #   Languages.new(name: languages.sample)
+        # end
+      end
 end
 
 teachers = Teacher.all

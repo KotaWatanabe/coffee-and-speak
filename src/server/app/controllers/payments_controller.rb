@@ -33,7 +33,7 @@ class PaymentsController < ApplicationController
       end
 
       def thanks
-        @lesson = Lesson.find(params[:id])
+        @lesson = Lesson.find(params[:lesson_id])
       end
 
       private

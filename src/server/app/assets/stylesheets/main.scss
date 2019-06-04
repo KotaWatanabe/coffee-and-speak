@@ -175,6 +175,7 @@ li{
     transition:all 0.3s ease-out;
     // background:hsla(6, 93%, 71%, 0.3);
     background:hsla(146, 50%, 36%, 0.3);
+    padding: 1em;
   }
   
   .teacher-card:hover{
@@ -219,9 +220,8 @@ li{
   width: 100%;
 }
 .teacher-image{
-  // width:100%;
+  width:50%;
   text-align:center;
-  display:flex;
 }
 .teacher-content{
   width:50%;
@@ -237,6 +237,9 @@ li{
 // .image-of-student{
 //   flex:1;
 // }
+.timeslot-time{
+  margin-left: 0.5em;
+}
 
 
 
@@ -280,6 +283,13 @@ footer{
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+.pay-card{
+  padding: 3em;
+  margin-top: 2em;
+}
+.pay-button{
+  margin:1em 0 0.5em 0;
 }
 
 /*DESKTOP LAST */

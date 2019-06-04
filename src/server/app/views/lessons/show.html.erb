@@ -52,8 +52,8 @@
                       </small>
 
                      
-                          <% if @lesson.aasm_state === "payed" %>
-                           <p>If this lesson is already finished, please click "Finish" button</p>  
+                          <% if @lesson.aasm_state === "payed" && current_user.teacher %>
+                           <p>If this lesson is already finished, please click "Completed" button</p>  
                             <%= form_with url: finish_lesson_path, :method => :PUT, local: true do |f| %>
                             <div class="form-group">
                               <%= f.hidden_field :lesson, value: @lesson.id %>
@@ -61,7 +61,7 @@
                               <%= f.hidden_field :user, value: @lesson.user.id %>
                               <%= f.hidden_field :comment, value: @lesson.comment %>
                             </div>
-                            <%= f.submit 'Completed', class: 'btn btn-warning col-6 col-md-3' %>
+                            <%= f.submit 'Completed', class: 'btn btn-warning col-6 col-md-3 mb-3' %>
                         <% end %>
                     <% end %>
 

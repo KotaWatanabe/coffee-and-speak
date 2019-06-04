@@ -1,12 +1,14 @@
-<div class="container-fluid">
+<div class="container-fluid padding">
 <h1>Please make the Payment</h1>
 
+<div class="card pay-card">
 <form action="/charge" method="post" id="payment-form">
   <div class="form-group">
-    <label for="card-element">
+    <h5><label for="card-element">
       Credit or debit card
-    </label>
-    <p>Price is $<strong><%= @teacher.price %></strong>CAD</p>
+    </label></h5>
+    <h5>Price is $<strong><%= @teacher.price %></strong>CAD</h5>
+    <div class="card-body">
     <div id="card-element">
       <!-- A Stripe Element will be inserted here. -->
     </div>
@@ -14,8 +16,11 @@
     <!-- Used to display Element errors. -->
     <div id="card-errors" role="alert"></div>
   </div>
+  </div>
 
-  <button>Submit Payment</button>
+
+</div>
+  <button class="pay-button btn btn-warning col-lg-4">Submit Payment</button>
 </form>
 
 <%= form_tag lesson_payments_path(@lesson), id: 'stripe-token-form' do %>

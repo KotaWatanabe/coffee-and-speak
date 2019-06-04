@@ -1,8 +1,6 @@
 class LessonsController < ApplicationController
 
     def create
-        # byebug
-     
         @lesson = Lesson.new lesson_params
        
         @lesson.user = current_user
@@ -29,13 +27,6 @@ class LessonsController < ApplicationController
     end
   
     def update
-    #   if @lesson.update user_params
-    #     flash[:success] = "Your profile was updated successfully!"
-    #     redirect_to root_path
-    #   else
-    #     render :edit
-    #   end
-
     end
 
     def destroy
@@ -52,7 +43,6 @@ class LessonsController < ApplicationController
          if @lesson.update lesson_params
             @lesson.approve
             @lesson.update lesson_params
-            flash[:success] = "Registration successful!"
             redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
         else
             render :new
@@ -66,7 +56,6 @@ class LessonsController < ApplicationController
          if @lesson.update lesson_params
             @lesson.decline
             @lesson.update lesson_params
-            flash[:success] = "Registration successful!"
             redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
         else
             render :new
