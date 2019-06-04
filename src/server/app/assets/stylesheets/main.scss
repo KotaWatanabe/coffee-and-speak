@@ -38,7 +38,12 @@ html {
 //   }
 .navbar{
     padding: 1em;
-    background:#2E8B57
+    background:#2E8B57;
+}
+header{
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .navbar li{
