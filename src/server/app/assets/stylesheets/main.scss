@@ -32,10 +32,10 @@ html {
   margin-bottom: 1rem;}
 
 
-  h1 {padding-top: 0.5em;}
-//   h1{
-//     font-family: 'Holtwood One SC', serif;
-//   }
+  h1 {
+    padding-top: 0.5em;
+  }
+
 .navbar{
     padding: 1em;
     background:#2E8B57;
@@ -306,11 +306,23 @@ footer{
   margin:1em 0 0.5em 0;
 }
 
-.thanks-message{
-  margin:0.5em 0 2em 0;
+.thanks-box{
+  text-align:center;
+  align-items: center;
+  justify-content: center;
 }
+
+// .thanks-message{
+//   margin:0.5em 0 2em 0;
+// }
 .blue{
   text-decoration: underline;
+}
+.check-mark{
+  color: #239b76;
+}
+.check-box{
+  display:none;
 }
 
 /*DESKTOP LAST */
@@ -373,13 +385,9 @@ body {
   }
 
   .index-image{
-    // width: 150px;
-    // height: 150px;
     border-radius:50px
   }
   .show-image{
-    // width: 350px;
-    // height: 350px;
     border-radius:80px;
     width:300px;
   }

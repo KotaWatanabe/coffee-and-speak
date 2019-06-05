@@ -7,14 +7,13 @@ class LessonsController < ApplicationController
         @id = params[:teacher]
         @teacher = Teacher.find(@id)
         @lesson.teacher = @teacher
-         if @lesson.save
-            @lesson.request
-            @lesson.save
-            flash[:success] = "Registration successful!"
-            redirect_to dashboard_user_path(current_user)
-        else
-            render :new
-        end
+            if @lesson.save
+                @lesson.request
+                @lesson.save
+                redirect_to dashboard_user_path(current_user)
+            else
+                render :new
+            end
     end
 
     def show
@@ -41,8 +40,7 @@ class LessonsController < ApplicationController
         @user = User.find(@id)
         @lesson.user = @user
          if @lesson.update lesson_params
-            @lesson.approve
-            @lesson.update lesson_params
+            @lesson.approve!
             redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
         else
             render :new
@@ -54,8 +52,7 @@ class LessonsController < ApplicationController
         @user = User.find(@id)
         @lesson.user = @user
          if @lesson.update lesson_params
-            @lesson.decline
-            @lesson.update lesson_params
+            @lesson.decline!
             redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
         else
             render :new
@@ -68,9 +65,7 @@ class LessonsController < ApplicationController
         @user = User.find(@id)
         @lesson.user = @user
          if @lesson.update lesson_params
-            @lesson.approve
-            @lesson.update lesson_params
-            flash[:success] = "Registration successful!"
+            @lesson.approve!
             redirect_to teacher_dashboard_teacher_path(@lesson.teacher)
         else
             render :new
@@ -98,8 +93,7 @@ class LessonsController < ApplicationController
         @user = User.find(@user_id)
         @lesson.user = @user
          if @lesson.update lesson_params
-            @lesson.finish
-            @lesson.update lesson_params
+            @lesson.finish!
             redirect_to teacher_dashboard_teacher_path(@teacher)
         else
             render :root_path
@@ -107,18 +101,11 @@ class LessonsController < ApplicationController
     end
 
     def done
-        # @lesson = Lesson.find(params[:lesson])
-        # @lesson.done
-        # @lesson.update lesson_params
+
     end
 
   
     private
-  
-    #   def set_lesson
-    #     @lesson = Lesson.find(params[:id])
-    #   end
-
     def lesson_params
         params.permit(:comment, :answer)
     end

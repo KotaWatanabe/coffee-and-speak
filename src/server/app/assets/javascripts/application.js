@@ -22,3 +22,11 @@
 //= require gmaps/google
 //= require_tree .
 
+$(document).ready(function(){
+    $(".thanks-box").on('mouseenter', event =>{
+        console.log("enter!")
+        $(".check-box").slideDown("fast");
+    })
+});
+
+
