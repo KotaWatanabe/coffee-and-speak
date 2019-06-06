@@ -194,7 +194,9 @@ li{
     transform:translateY(-2px) scale(1) translateZ(0);
   }
   
-
+  .new-teacher-form{
+    margin-bottom: 2em;
+  }
 
   // teacher show page
 
@@ -209,6 +211,10 @@ li{
   .teacher-booking-box{
     flex:1;
     padding: 1em;
+  }
+
+  .review-title{
+    margin-left: 1em;
   }
 
   // teacher dashboard
